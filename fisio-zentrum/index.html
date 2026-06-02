@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FisioZentrum Zaragoza — Fisioterapia Avanzada</title>
+  <meta name="description" content="Centro de fisioterapia avanzada en Zaragoza. Fisioterapia deportiva, rehabilitación de columna y fisioterapia neurológica. Primera valoración gratuita.">
+  <meta property="og:title" content="FisioZentrum Zaragoza — Fisioterapia Avanzada">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","name":"FisioZentrum Zaragoza","address":{"@type":"PostalAddress","streetAddress":"C/ Gran Vía, 45","addressLocality":"Zaragoza","postalCode":"50005","addressCountry":"ES"},"telephone":"+34976123456","openingHours":["Mo-Fr 08:00-20:00","Sa 09:00-14:00"],"medicalSpecialty":"PhysicalTherapy"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1B2A; --navy-mid: #1A2F4A; --navy-light: #243B55;
+      --teal: #00A896; --teal-light: #00C9B5; --teal-dark: #007A6E;
+      --white: #FFFFFF; --gray-light: #F0F5FA; --gray-mid: #8FA3B8;
+      --text: #1A2F4A; --text-light: #5A7394; --border: #E0EAF3;
+      --ff: 'Plus Jakarta Sans', sans-serif;
+      --shadow-sm: 0 2px 8px rgba(13,27,42,.08);
+      --shadow-md: 0 8px 32px rgba(13,27,42,.12);
+      --shadow-lg: 0 24px 64px rgba(13,27,42,.18);
+      --r: 12px; --r-lg: 20px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--ff);color:var(--text);background:var(--white);overflow-x:hidden;cursor:none}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font-family:var(--ff);cursor:none;border:none;background:none}
+
+    /* LOADER */
+    .loader{position:fixed;inset:0;z-index:9999;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity .5s,visibility .5s}
+    .loader.hidden{opacity:0;visibility:hidden}
+    .loader__logo{font-size:2rem;font-weight:800;color:var(--white);letter-spacing:-.02em}
+    .loader__logo span{color:var(--teal)}
+    .loader__bar{width:200px;height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+    .loader__fill{height:100%;width:0;background:var(--teal);transition:width 1.2s ease}
+
+    /* CURSOR */
+    .cursor{position:fixed;pointer-events:none;z-index:9998;width:10px;height:10px;background:var(--teal);border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+    .cursor-ring{position:fixed;pointer-events:none;z-index:9997;width:32px;height:32px;border:1.5px solid rgba(0,168,150,.35);border-radius:50%;transform:translate(-50%,-50%);transition:transform .08s}
+
+    /* PROGRESS */
+    .progress{position:fixed;right:20px;top:50%;transform:translateY(-50%);width:3px;height:120px;background:rgba(0,168,150,.12);border-radius:3px;z-index:100}
+    .progress__fill{width:100%;height:0;background:var(--teal);border-radius:3px;position:relative}
+    .progress__dot{position:absolute;right:-4px;bottom:-5px;width:11px;height:11px;background:var(--teal);border-radius:50%;border:2px solid var(--white)}
+
+    /* ANNOUNCEMENT */
+    .announce{background:var(--teal);color:var(--white);text-align:center;padding:10px 20px;font-size:.78rem;font-weight:600;letter-spacing:.04em}
+    .announce a{color:var(--white);text-decoration:underline}
+
+    /* NAV */
+    .nav{position:fixed;top:36px;left:0;right:0;z-index:500;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:72px;transition:background .3s,box-shadow .3s,top .3s}
+    .nav.scrolled{top:0;background:rgba(13,27,42,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(0,168,150,.2)}
+    .nav__logo{font-size:1.35rem;font-weight:800;color:var(--white);letter-spacing:-.02em}
+    .nav__logo span{color:var(--teal)}
+    .nav__links{display:flex;align-items:center;gap:28px;list-style:none}
+    .nav__links a{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.7);letter-spacing:.04em;text-transform:uppercase;transition:color .25s}
+    .nav__links a:hover{color:var(--teal)}
+    .nav__cta{background:var(--teal)!important;color:var(--white)!important;padding:9px 20px!important;border-radius:6px!important;transition:background .25s!important}
+    .nav__cta:hover{background:var(--teal-dark)!important}
+
+
+    /* HERO */
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--navy)}
+    .hero__bg{position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 60% 70% at 80% 50%,rgba(0,168,150,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 15% 65%,rgba(0,168,150,.07) 0%,transparent 65%),linear-gradient(160deg,#0D1B2A 0%,#1A2F4A 60%,#0D1B2A 100%)}
+    #heroCanvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.5}
+    .hero__content{position:relative;z-index:2;padding:140px 80px 80px;max-width:680px}
+    .hero__badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,168,150,.1);border:1px solid rgba(0,168,150,.3);padding:6px 14px;border-radius:100px;font-size:.78rem;font-weight:600;color:var(--teal-light);letter-spacing:.04em;margin-bottom:28px}
+    .hero__badge-dot{width:7px;height:7px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+    .hero__eyebrow{font-size:.78rem;font-weight:700;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+    .hero__title{font-size:clamp(2.8rem,5vw,4.4rem);font-weight:800;color:var(--white);line-height:1.07;letter-spacing:-.03em;margin-bottom:24px}
+    .hero__title span{color:var(--teal)}
+    /* TYPEWRITER */
+    .tw-word{display:inline-block;opacity:1;transition:opacity .35s ease,transform .35s ease}
+    .tw-word.out{opacity:0;transform:translateY(-12px)}
+    .tw-word.in{opacity:0;transform:translateY(12px)}
+    .hero__desc{font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.75;max-width:500px;margin-bottom:40px}
+    .hero__actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .btn-primary{background:var(--teal);color:var(--white);padding:14px 28px;border-radius:8px;font-size:.9rem;font-weight:700;letter-spacing:.02em;transition:background .25s,transform .2s,box-shadow .25s;display:inline-flex;align-items:center;gap:8px}
+    .btn-primary:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,168,150,.3)}
+    .btn-secondary{background:transparent;color:var(--white);padding:13px 28px;border-radius:8px;border:1.5px solid rgba(255,255,255,.22);font-size:.9rem;font-weight:600;transition:border-color .25s,color .25s;display:inline-flex;align-items:center;gap:8px}
+    .btn-secondary:hover{border-color:var(--teal);color:var(--teal)}
+    .hero__visual{position:absolute;right:60px;top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;gap:16px;align-items:flex-end}
+    .hero__stat-card{background:rgba(255,255,255,.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:20px 24px;min-width:180px}
+    .hero__stat-num{font-size:2rem;font-weight:800;color:var(--teal);letter-spacing:-.03em;line-height:1}
+    .hero__stat-label{font-size:.75rem;color:rgba(255,255,255,.5);margin-top:4px;font-weight:500}
+    .hero__rating{display:flex;align-items:center;gap:8px;margin-top:8px}
+    .hero__rating-stars{color:#F59E0B;font-size:.9rem}
+    .hero__rating-text{font-size:.75rem;color:rgba(255,255,255,.5)}
+
+    /* TAREA 7 — TICKER */
+    .ticker{background:var(--navy-mid);border-top:1px solid rgba(0,168,150,.2);border-bottom:1px solid rgba(0,168,150,.2);overflow:hidden;height:42px;display:flex;align-items:center;position:relative}
+    .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+    .ticker::before{left:0;background:linear-gradient(90deg,var(--navy-mid),transparent)}
+    .ticker::after{right:0;background:linear-gradient(-90deg,var(--navy-mid),transparent)}
+    .ticker__track{display:flex;gap:0;white-space:nowrap;animation:tickerScroll 30s linear infinite}
+    .ticker:hover .ticker__track{animation-play-state:paused}
+    .ticker__item{display:inline-flex;align-items:center;gap:8px;padding:0 40px;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:.04em}
+    .ticker__dot{width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+    @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* STATS */
+    .statsbar{background:var(--navy-mid);border-top:1px solid rgba(0,168,150,.15);border-bottom:1px solid rgba(0,168,150,.15)}
+    .statsbar__grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:1100px;margin:0 auto}
+    .statsbar__item{padding:32px 24px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+    .statsbar__item:last-child{border-right:none}
+    .statsbar__num{font-size:2.2rem;font-weight:800;color:var(--teal);letter-spacing:-.03em;line-height:1}
+    .statsbar__label{font-size:.78rem;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-top:8px}
+
+    /* LAYOUT */
+    .section{padding:100px 40px}
+    .section--dark{background:var(--navy)}
+    .section--gray{background:var(--gray-light)}
+    .container{max-width:1100px;margin:0 auto}
+    .section__eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+    .section--dark .section__eyebrow{color:var(--teal-light)}
+    .section__title{font-size:clamp(1.9rem,3.5vw,2.7rem);font-weight:800;letter-spacing:-.025em;line-height:1.14;margin-bottom:18px}
+    .section--dark .section__title{color:var(--white)}
+    .section__desc{font-size:1rem;color:var(--text-light);line-height:1.72;max-width:520px;margin-bottom:56px}
+    .section--dark .section__desc{color:rgba(255,255,255,.52)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    /* BODY MAP REDESIGN */
+    .bm-toggle{display:flex;justify-content:center;gap:8px;margin-bottom:44px}
+    .bm-toggle__btn{padding:10px 26px;border-radius:100px;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid rgba(0,168,150,.3);color:rgba(255,255,255,.45);transition:all .25s;cursor:pointer;background:transparent}
+    .bm-toggle__btn.active{background:var(--teal);border-color:var(--teal);color:var(--white);box-shadow:0 4px 20px rgba(0,168,150,.3)}
+    .bm-layout{display:grid;grid-template-columns:auto 1fr;gap:52px;align-items:center;max-width:960px;margin:0 auto}
+    .bm-svg-wrap{display:flex;justify-content:center;position:relative}
+    .bm-svg{width:240px;overflow:visible;filter:drop-shadow(0 24px 48px rgba(0,168,150,.12))}
+    .bm-body-outline{fill:rgba(255,255,255,.06);stroke:rgba(255,255,255,.18);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+    /* Hotspots */
+    .bm-hotspot{cursor:pointer}
+    .bm-ping{fill:rgba(0,168,150,.12);stroke:rgba(0,168,150,.3);stroke-width:1;animation:bmPing 2.8s ease-out infinite}
+    .bm-dot{fill:var(--teal);transition:all .2s}
+    .bm-line{stroke:rgba(0,168,150,.35);stroke-width:.8;stroke-dasharray:3 2}
+    .bm-label{font-family:var(--ff);font-size:9.5px;fill:rgba(255,255,255,.45);font-weight:500;transition:all .2s}
+    .bm-hotspot:hover .bm-dot,.bm-hotspot.active .bm-dot{fill:var(--white);filter:drop-shadow(0 0 5px var(--teal))}
+    .bm-hotspot:hover .bm-ping,.bm-hotspot.active .bm-ping{fill:rgba(0,168,150,.28);stroke:var(--teal)}
+    .bm-hotspot:hover .bm-label,.bm-hotspot.active .bm-label{fill:var(--white);font-weight:700;font-size:10px}
+    .bm-hotspot:hover .bm-line,.bm-hotspot.active .bm-line{stroke:var(--teal)}
+    .bm-hotspot.active .bm-ping{animation:none;fill:rgba(0,168,150,.2)}
+    @keyframes bmPing{0%{opacity:.9}60%{opacity:0;r:20}100%{opacity:0;r:20}}
+    /* Panel */
+    .bm-panel{background:rgba(255,255,255,.04);border:1px solid rgba(0,168,150,.18);border-radius:var(--r-lg);padding:36px;min-height:420px;display:flex;flex-direction:column;justify-content:center;transition:all .3s}
+    .bpanel-default{text-align:center;color:rgba(255,255,255,.28);font-size:.9rem;line-height:1.7}
+    .bpanel-default-icon{font-size:3rem;margin-bottom:14px;display:block}
+    .bpanel__zone{font-size:.7rem;font-weight:700;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+    .bpanel__title{font-size:1.5rem;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-bottom:18px;line-height:1.2}
+    .bpanel__tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+    .bpanel__tag{background:rgba(0,168,150,.1);border:1px solid rgba(0,168,150,.2);color:var(--teal-light);padding:4px 11px;border-radius:100px;font-size:.75rem;font-weight:600}
+    .bpanel__sessions{display:flex;align-items:center;gap:16px;background:rgba(0,168,150,.07);border:1px solid rgba(0,168,150,.15);border-radius:10px;padding:14px 18px;margin-bottom:16px}
+    .bpanel__sessions-num{font-size:2rem;font-weight:800;color:var(--teal);line-height:1;letter-spacing:-.02em}
+    .bpanel__sessions-text{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.5}
+    .bpanel__specialist{background:rgba(255,255,255,.04);border-radius:8px;padding:10px 14px;font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:18px;display:flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.08)}
+    .bm-hint{font-size:.72rem;color:rgba(255,255,255,.28);text-align:center;margin-top:12px}
+    @media(max-width:900px){.bm-layout{grid-template-columns:1fr}.bm-svg-wrap{margin-bottom:28px}.bm-svg{width:200px}}
+
+    /* TREATMENTS */
+    .treatments__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+    .tcard{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:32px 26px;transition:border-color .3s,box-shadow .3s,transform .15s ease-out;will-change:transform;transform-style:preserve-3d;cursor:default}
+    .tcard:hover{border-color:var(--teal);box-shadow:0 20px 60px rgba(0,168,150,.1)}
+    .tcard__icon{width:52px;height:52px;background:rgba(0,168,150,.09);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:22px}
+    .tcard__name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-.01em}
+    .tcard__desc{font-size:.84rem;color:var(--text-light);line-height:1.65;margin-bottom:20px}
+    .tcard__badge{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;color:var(--teal-dark);letter-spacing:.04em;text-transform:uppercase}
+
+    /* E — GALERÍA */
+    .gal__grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:220px 220px;gap:16px}
+    .gal__item{position:relative;border-radius:var(--r);overflow:hidden;cursor:pointer}
+    .gal__item--big{grid-row:span 2;grid-column:span 1}
+    .gal__img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;transition:transform .4s ease}
+    .gal__img--1{background:linear-gradient(135deg,#0D2438,#1A3A55)}
+    .gal__img--2{background:linear-gradient(135deg,#0D2E2A,#1A4A44)}
+    .gal__img--3{background:linear-gradient(135deg,#1A2D0D,#2A4A1A)}
+    .gal__img--4{background:linear-gradient(135deg,#1A0D2E,#2A1A4A)}
+    .gal__img--5{background:linear-gradient(135deg,#2E1A0D,#4A2A1A)}
+    .gal__item:hover .gal__img{transform:scale(1.06)}
+    .gal__overlay{position:absolute;bottom:0;left:0;right:0;padding:16px 18px;background:linear-gradient(transparent,rgba(0,0,0,.65));opacity:0;transition:opacity .3s}
+    .gal__item:hover .gal__overlay{opacity:1}
+    .gal__overlay span{font-size:.8rem;font-weight:600;color:var(--white)}
+    @media(max-width:700px){.gal__grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.gal__item--big{grid-column:span 2;height:200px}}
+
+    /* D — EJERCICIOS */
+    .ej__filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px}
+    .ej__filter{padding:8px 20px;border-radius:100px;border:1.5px solid var(--border);font-size:.8rem;font-weight:600;color:var(--text-light);transition:all .22s;cursor:pointer;background:var(--white)}
+    .ej__filter:hover{border-color:var(--teal);color:var(--teal)}
+    .ej__filter.active{background:var(--teal);border-color:var(--teal);color:var(--white)}
+    .ej__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .ej__card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .2s;display:flex;flex-direction:column}
+    .ej__card:hover{border-color:var(--teal);box-shadow:var(--shadow-md);transform:translateY(-4px)}
+    .ej__card.hidden{display:none}
+    .ej__visual{background:linear-gradient(135deg,var(--navy),var(--navy-mid));height:100px;display:flex;align-items:center;justify-content:center;font-size:3rem}
+    .ej__body{padding:22px;display:flex;flex-direction:column;flex:1;gap:8px}
+    .ej__zone{font-size:.7rem;font-weight:700;color:var(--teal);letter-spacing:.1em;text-transform:uppercase}
+    .ej__name{font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-.01em;line-height:1.3}
+    .ej__desc{font-size:.82rem;color:var(--text-light);line-height:1.6;flex:1}
+    .ej__meta{display:flex;gap:12px;font-size:.75rem;color:var(--text-light);font-weight:500}
+    .ej__link{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;color:var(--teal);margin-top:4px;transition:gap .2s}
+    .ej__link:hover{gap:10px}
+    @media(max-width:900px){.ej__grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:500px){.ej__grid{grid-template-columns:1fr}}
+
+    /* C — CHECKLIST */
+    .chk__wrap{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+    .chk__grid{display:flex;flex-direction:column;gap:12px}
+    .chk__item{display:flex;align-items:flex-start;gap:14px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:16px 18px;cursor:pointer;transition:border-color .25s,box-shadow .2s}
+    .chk__item:hover{border-color:var(--teal)}
+    .chk__item:has(.chk__input:checked){border-color:var(--teal);background:rgba(0,168,150,.04);box-shadow:0 4px 16px rgba(0,168,150,.08)}
+    .chk__input{display:none}
+    .chk__box{width:20px;height:20px;flex-shrink:0;border:2px solid var(--border);border-radius:5px;margin-top:2px;transition:all .2s;position:relative;background:var(--white)}
+    .chk__item:has(.chk__input:checked) .chk__box{background:var(--teal);border-color:var(--teal)}
+    .chk__item:has(.chk__input:checked) .chk__box::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:.75rem;font-weight:700}
+    .chk__text{display:flex;flex-direction:column;gap:3px}
+    .chk__text strong{font-size:.88rem;font-weight:700;color:var(--text)}
+    .chk__text span{font-size:.78rem;color:var(--text-light)}
+    .chk__result{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:28px;min-height:200px}
+    .chk__result-title{font-size:.9rem;font-weight:600;color:var(--text-light);margin-bottom:16px}
+    .chk__result-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .chk__result-list li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5}
+    .chk__result-list li::before{content:'→';color:var(--teal);font-weight:700;flex-shrink:0}
+    @media(max-width:700px){.chk__wrap{grid-template-columns:1fr}}
+
+    /* A — CERTIFICACIONES */
+    .cert__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .cert__item{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:24px 20px;text-align:center;transition:border-color .3s,box-shadow .3s,transform .2s;cursor:default}
+    .cert__item:hover{border-color:var(--teal);box-shadow:0 8px 32px rgba(0,168,150,.1);transform:translateY(-3px)}
+    .cert__icon{font-size:2rem;margin-bottom:12px;display:block}
+    .cert__name{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.4}
+    .cert__desc{font-size:.75rem;color:var(--text-light);line-height:1.5}
+    @media(max-width:900px){.cert__grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:500px){.cert__grid{grid-template-columns:repeat(2,1fr)}}
+
+    /* TAREA 6 — QUIZ */
+    .quiz__wrap{max-width:640px;margin:0 auto;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:40px;box-shadow:var(--shadow-lg)}
+    .quiz__progress-bar{height:4px;background:var(--border);border-radius:4px;margin-bottom:12px;overflow:hidden}
+    .quiz__progress-fill{height:100%;background:var(--teal);border-radius:4px;width:20%;transition:width .4s ease}
+    .quiz__step-label{font-size:.75rem;font-weight:600;color:var(--text-light);letter-spacing:.06em;text-transform:uppercase;margin-bottom:28px}
+    .quiz__step{display:none}
+    .quiz__step.active{display:block}
+    .quiz__q{font-size:1.15rem;font-weight:700;color:var(--text);letter-spacing:-.01em;margin-bottom:24px;line-height:1.45}
+    .quiz__opts{display:flex;flex-direction:column;gap:10px}
+    .quiz__opt{padding:13px 18px;border:1.5px solid var(--border);border-radius:10px;font-size:.9rem;font-weight:500;color:var(--text);text-align:left;transition:all .2s;cursor:pointer}
+    .quiz__opt:hover{border-color:var(--teal);color:var(--teal);background:rgba(0,168,150,.04)}
+    .quiz__opt.sel{border-color:var(--teal);background:var(--teal);color:var(--white)}
+    .quiz__result{display:none;text-align:center}
+    .quiz__result.show{display:block}
+    .quiz__result-icon{font-size:3.5rem;margin-bottom:16px}
+    .quiz__result-title{font-size:.75rem;font-weight:700;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+    .quiz__result-specialist{font-size:1.5rem;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:12px}
+    .quiz__result-desc{font-size:.9rem;color:var(--text-light);line-height:1.7;margin-bottom:16px}
+    .quiz__result-sessions{display:inline-flex;align-items:center;gap:8px;background:rgba(0,168,150,.08);border-radius:100px;padding:6px 16px;font-size:.82rem;font-weight:600;color:var(--teal);margin-bottom:24px}
+    .quiz__result .btn-primary{margin:0 auto 16px;display:inline-flex}
+    .quiz__restart{font-size:.8rem;color:var(--text-light);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:var(--ff)}
+    .quiz__restart:hover{color:var(--teal)}
+
+    /* TAREA 2 — COMPARADOR */
+    .cmp__grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:900px;margin:0 auto}
+    .cmp__col{border-radius:var(--r-lg);padding:36px 32px;display:flex;flex-direction:column;gap:0}
+    .cmp__col--bad{background:var(--white);border:1.5px solid var(--border)}
+    .cmp__col--good{background:var(--navy);border:1.5px solid var(--teal)}
+    .cmp__col-header{display:flex;align-items:center;gap:12px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+    .cmp__col--good .cmp__col-header{border-bottom-color:rgba(0,168,150,.25)}
+    .cmp__col-icon{font-size:1.4rem}
+    .cmp__col-title{font-size:1.05rem;font-weight:800;color:var(--text);letter-spacing:-.01em}
+    .cmp__col--good .cmp__col-title{color:var(--white)}
+    .cmp__row{padding:13px 0;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--text-light);line-height:1.5}
+    .cmp__col--bad .cmp__row{text-decoration-color:transparent}
+    .cmp__col--good .cmp__row{border-bottom-color:rgba(0,168,150,.15);color:rgba(255,255,255,.8);font-weight:500}
+    .cmp__col--bad .cmp__row:last-child,.cmp__col--good .cmp__row:last-child{border-bottom:none}
+    .cmp__divider{display:flex;align-items:center;justify-content:center;padding:0 20px}
+    .cmp__vs{width:44px;height:44px;background:var(--text);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:var(--white);letter-spacing:.06em;flex-shrink:0}
+    @media(max-width:700px){.cmp__grid{grid-template-columns:1fr}.cmp__divider{padding:16px 0}.cmp__vs{margin:0 auto}}
+
+    /* TIMELINE */
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+    .timeline::before{content:'';position:absolute;top:27px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,var(--teal),var(--teal-light));z-index:0}
+    .tstep{text-align:center;padding:0 16px;position:relative;z-index:1}
+    .tstep__num{width:54px;height:54px;background:var(--navy-mid);border:2px solid var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:800;color:var(--teal);margin:0 auto 22px}
+    .tstep__week{font-size:.7rem;font-weight:700;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+    .tstep__title{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:10px}
+    .tstep__desc{font-size:.82rem;color:rgba(255,255,255,.48);line-height:1.6}
+
+    /* CALC */
+    .calc{background:var(--white);border-radius:var(--r-lg);padding:48px;box-shadow:var(--shadow-lg);max-width:740px;margin:0 auto}
+    .calc__title{font-size:1.5rem;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:6px}
+    .calc__sub{font-size:.88rem;color:var(--text-light);margin-bottom:36px}
+    .calc__step{margin-bottom:32px}
+    .calc__label{font-size:.8rem;font-weight:700;color:var(--text);letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
+    .calc__options{display:flex;flex-wrap:wrap;gap:10px}
+    .calc__opt{padding:9px 16px;border-radius:8px;border:1.5px solid var(--border);font-size:.84rem;font-weight:600;color:var(--text-light);transition:all .2s;cursor:pointer}
+    .calc__opt:hover{border-color:var(--teal);color:var(--teal)}
+    .calc__opt.sel{background:var(--teal);color:var(--white);border-color:var(--teal)}
+    .calc__slider{width:100%;accent-color:var(--teal);cursor:pointer;margin:6px 0}
+    .calc__slider-labels{display:flex;justify-content:space-between;font-size:.73rem;color:var(--text-light);margin-top:4px}
+    .calc__result{background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:var(--r);padding:28px;display:none;margin-top:8px}
+    .calc__result.show{display:block}
+    .calc__result-row{display:flex;gap:40px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+    .calc__result-num{font-size:3rem;font-weight:800;color:var(--teal);letter-spacing:-.03em;line-height:1}
+    .calc__result-label{font-size:.82rem;color:rgba(255,255,255,.55);margin-top:4px}
+    .calc__result-cost{font-size:1.1rem;font-weight:700;color:var(--white)}
+    .calc__result-note{font-size:.73rem;color:rgba(255,255,255,.32);line-height:1.6}
+    .calc__btn{width:100%;background:var(--teal);color:var(--white);padding:14px;border-radius:8px;font-size:.9rem;font-weight:700;margin-top:24px;transition:background .25s}
+    .calc__btn:hover{background:var(--teal-dark)}
+
+    /* TEAM */
+    .team__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .team-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:box-shadow .3s,transform .2s}
+    .team-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
+    .team-card__img{width:100%;aspect-ratio:4/3;background:linear-gradient(145deg,#E0EAF3,var(--gray-light));display:flex;align-items:center;justify-content:center;font-size:4rem}
+    .team-card__body{padding:24px}
+    .team-card__name{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:4px}
+    .team-card__role{font-size:.78rem;font-weight:700;color:var(--teal);letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
+    .team-card__desc{font-size:.83rem;color:var(--text-light);line-height:1.65;margin-bottom:16px}
+    .team-card__tags{display:flex;flex-wrap:wrap;gap:6px}
+    .team-card__tag{background:var(--gray-light);color:var(--text-light);padding:3px 10px;border-radius:100px;font-size:.71rem;font-weight:600}
+
+    /* REVIEWS */
+    .reviews__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .rcard{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:28px;transition:box-shadow .3s}
+    .rcard:hover{box-shadow:var(--shadow-md)}
+    .rcard__stars{color:#F59E0B;font-size:1rem;margin-bottom:14px}
+    .rcard__text{font-size:.87rem;color:var(--text);line-height:1.72;margin-bottom:20px;font-style:italic}
+    .rcard__author{display:flex;align-items:center;gap:12px}
+    .rcard__avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:700;color:var(--white);flex-shrink:0}
+    .rcard__name{font-size:.84rem;font-weight:700;color:var(--text)}
+    .rcard__date{font-size:.73rem;color:var(--text-light)}
+
+    /* PRICING */
+    .pricing__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+    .pcard{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:36px 32px}
+    .pcard--feat{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,168,150,.1);position:relative}
+    .pcard__badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:var(--white);padding:4px 16px;border-radius:100px;font-size:.71rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+    .pcard__name{font-size:.78rem;font-weight:700;color:var(--text-light);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+    .pcard__price{font-size:2.5rem;font-weight:800;color:var(--text);letter-spacing:-.03em;line-height:1}
+    .pcard__price span{font-size:1rem;font-weight:500;color:var(--text-light)}
+    .pcard__desc{font-size:.83rem;color:var(--text-light);margin:12px 0 22px;line-height:1.6}
+    .pcard__features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+    .pcard__features li{display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--text)}
+    .pcard__features li::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px}
+    .pcard__cta{width:100%;padding:13px;border-radius:8px;font-size:.88rem;font-weight:700;text-align:center;display:block;transition:all .25s}
+    .pcard--feat .pcard__cta{background:var(--teal);color:var(--white)}
+    .pcard--feat .pcard__cta:hover{background:var(--teal-dark)}
+    .pcard:not(.pcard--feat) .pcard__cta{border:1.5px solid var(--border);color:var(--text)}
+    .pcard:not(.pcard--feat) .pcard__cta:hover{border-color:var(--teal);color:var(--teal)}
+
+    /* TAREA 5 — SEGURO */
+    .ins__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:32px;max-width:860px;margin-left:auto;margin-right:auto}
+    .ins__btn{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:var(--r);padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:all .25s}
+    .ins__btn:hover{border-color:var(--teal);background:rgba(0,168,150,.08)}
+    .ins__btn.active{border-color:var(--teal);background:rgba(0,168,150,.12)}
+    .ins__name{font-size:.82rem;font-weight:700;color:rgba(255,255,255,.8);text-align:center}
+    .ins__check{font-size:1rem;color:var(--teal)}
+    .ins__panel{max-width:860px;margin:0 auto;max-height:0;overflow:hidden;transition:max-height .5s ease,opacity .4s}
+    .ins__panel.show{max-height:300px}
+    .ins__panel-inner{background:rgba(255,255,255,.05);border:1px solid rgba(0,168,150,.25);border-radius:var(--r-lg);padding:28px 32px}
+    .ins__panel-top{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+    .ins__panel-seg{font-size:1.2rem;font-weight:800;color:var(--white)}
+    .ins__panel-status{padding:4px 14px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .ins__panel-status.ok{background:rgba(0,168,150,.2);color:var(--teal-light)}
+    .ins__panel-status.parcial{background:rgba(245,158,11,.15);color:#FCD34D}
+    .ins__panel-status.no{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6)}
+    .ins__panel-sesiones{font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:12px}
+    .ins__panel-nota{font-size:.9rem;color:rgba(255,255,255,.75);line-height:1.7}
+    @media(max-width:700px){.ins__grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:400px){.ins__grid{grid-template-columns:repeat(2,1fr)}}
+
+    /* FAQ */
+    .faq{max-width:720px;margin:0 auto}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-item:first-child{border-top:1px solid var(--border)}
+    .faq-q{width:100%;padding:20px 0;display:flex;align-items:center;justify-content:space-between;font-size:.94rem;font-weight:600;color:var(--text);text-align:left;gap:16px;transition:color .25s}
+    .faq-q:hover{color:var(--teal)}
+    .faq-icon{width:28px;height:28px;flex-shrink:0;background:var(--gray-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--teal);transition:transform .3s,background .3s}
+    .faq-item.open .faq-icon{transform:rotate(45deg);background:var(--teal);color:var(--white)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+    .faq-item.open .faq-a{max-height:300px}
+    .faq-a-inner{font-size:.87rem;color:var(--text-light);line-height:1.72;padding-bottom:20px}
+
+    /* CONTACT */
+    .contact__grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+    .cinfo{display:flex;flex-direction:column;gap:22px}
+    .cinfo__item{display:flex;align-items:flex-start;gap:16px}
+    .cinfo__icon{width:48px;height:48px;flex-shrink:0;background:rgba(0,168,150,.09);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+    .cinfo__label{font-size:.7rem;font-weight:700;color:var(--teal);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+    .cinfo__value{font-size:.92rem;font-weight:600;color:var(--text)}
+    .cinfo__map{width:100%;height:280px;border-radius:var(--r-lg);border:1.5px solid var(--border);overflow:hidden;margin-top:8px;background:var(--gray-light)}
+    .cinfo__map iframe{width:100%;height:100%;border:none}
+    .cform{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:36px}
+    .cform__title{font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:24px}
+    .fg{margin-bottom:16px}
+    .flabel{font-size:.76rem;font-weight:600;color:var(--text);letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:7px}
+    .finput,.fselect,.ftextarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--ff);font-size:.88rem;color:var(--text);background:var(--white);transition:border-color .25s,box-shadow .25s;outline:none}
+    .finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,168,150,.09)}
+    .ftextarea{resize:vertical;min-height:90px}
+    .fsubmit{width:100%;background:var(--teal);color:var(--white);padding:14px;border-radius:8px;font-size:.9rem;font-weight:700;transition:background .25s;margin-top:4px}
+    .fsubmit:hover{background:var(--teal-dark)}
+
+    /* B — VOLVER ARRIBA */
+    .back-top{position:fixed;bottom:100px;right:28px;z-index:199;width:44px;height:44px;background:var(--navy-mid);border:1.5px solid rgba(0,168,150,.35);border-radius:50%;color:var(--teal);font-size:1.1rem;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,background .25s;pointer-events:none;cursor:pointer}
+    .back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
+    .back-top:hover{background:var(--teal);color:var(--white)}
+
+    /* WA FLOAT */
+    .wa{position:fixed;bottom:28px;right:28px;z-index:200;display:flex;align-items:center;gap:12px}
+    .wa__label{background:var(--white);color:var(--text);padding:8px 16px;border-radius:20px;font-size:.8rem;font-weight:600;box-shadow:var(--shadow-md);opacity:0;transform:translateX(10px);transition:opacity .3s,transform .3s;white-space:nowrap}
+    .wa:hover .wa__label{opacity:1;transform:translateX(0)}
+    .wa__btn{width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.35);font-size:1.6rem;transition:transform .2s,box-shadow .2s}
+    .wa__btn:hover{transform:scale(1.08);box-shadow:0 12px 32px rgba(37,211,102,.45)}
+
+    /* FOOTER */
+    .footer{background:var(--navy);border-top:1px solid rgba(0,168,150,.12);padding:60px 40px 32px}
+    .footer__grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;max-width:1100px;margin:0 auto 48px}
+    .footer__logo{font-size:1.3rem;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-bottom:14px}
+    .footer__logo span{color:var(--teal)}
+    .footer__desc{font-size:.82rem;color:rgba(255,255,255,.42);line-height:1.7;max-width:260px}
+    .footer__col-title{font-size:.7rem;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+    .footer__links{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .footer__links a{font-size:.82rem;color:rgba(255,255,255,.45);transition:color .25s}
+    .footer__links a:hover{color:var(--teal)}
+    .footer__bottom{max-width:1100px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;font-size:.73rem;color:rgba(255,255,255,.28)}
+
+    /* MOBILE */
+    @media(max-width:900px){
+      .nav__links{display:none}
+      .hero__content{padding:120px 28px 60px}
+      .hero__visual{display:none}
+      .statsbar__grid{grid-template-columns:repeat(2,1fr)}
+      .statsbar__item:nth-child(2){border-right:none}
+      .treatments__grid{grid-template-columns:repeat(2,1fr)}
+      .timeline{grid-template-columns:repeat(2,1fr);gap:40px}
+      .timeline::before{display:none}
+      .team__grid{grid-template-columns:repeat(2,1fr)}
+      .reviews__grid{grid-template-columns:1fr}
+      .pricing__grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+      .contact__grid{grid-template-columns:1fr}
+      .footer__grid{grid-template-columns:1fr 1fr}
+      .bodymap{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      .section{padding:60px 20px}
+      .treatments__grid{grid-template-columns:1fr}
+      .timeline{grid-template-columns:1fr}
+      .team__grid{grid-template-columns:1fr}
+      .footer__grid{grid-template-columns:1fr}
+      .calc{padding:28px 20px}
+      .progress{display:none}
+      .subnav__link{padding:0 10px;font-size:.65rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader__logo">Fisio<span>Zentrum</span></div>
+  <div class="loader__bar"><div class="loader__fill" id="loaderFill"></div></div>
+</div>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Progress -->
+<div class="progress"><div class="progress__fill" id="progressFill"><div class="progress__dot"></div></div></div>
+
+<!-- B — BOTÓN VOLVER ARRIBA -->
+<button class="back-top" id="backTop" aria-label="Volver arriba">↑</button>
+
+<!-- WA Float -->
+<a class="wa" href="https://wa.me/34612345678?text=Hola%2C%20quiero%20pedir%20cita%20en%20FisioZentrum.%20Me%20duele%20la%20zona%20de%20" target="_blank" rel="noopener">
+  <span class="wa__label">Pedir cita por WhatsApp</span>
+  <span class="wa__btn">💬</span>
+</a>
+
+<!-- Announcement -->
+<div class="announce" id="announceBar">🗓️ Primera valoración <strong>100% gratuita</strong> — <a href="#contacto">Reserva tu cita ahora →</a></div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <div class="nav__logo">Fisio<span>Zentrum</span></div>
+  <ul class="nav__links">
+    <li><a href="#tratamientos">Tratamientos</a></li>
+    <li><a href="#metodo">Método</a></li>
+    <li><a href="#calculadora">Calculadora</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="https://wa.me/34612345678?text=Hola%2C%20quiero%20pedir%20cita" target="_blank" class="nav__cta">Pedir cita</a></li>
+  </ul>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero__bg"></div>
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero__content">
+    <div class="hero__badge reveal"><span class="hero__badge-dot"></span><span id="urgencyBadge">🟢 Plazas disponibles esta semana</span></div>
+    <div class="hero__eyebrow reveal">Fisioterapia Avanzada · Zaragoza</div>
+    <h1 class="hero__title reveal d1">Recupera tu<br><span id="twWord" class="tw-word">lumbalgia</span><br>sin dolor</h1>
+    <p class="hero__desc reveal d2">Más de 3.200 pacientes recuperados en 14 años. Diagnóstico preciso, tratamiento personalizado y resultados medibles desde la primera sesión.</p>
+    <div class="hero__actions reveal d3">
+      <a href="https://wa.me/34612345678?text=Hola%2C%20quiero%20pedir%20la%20valoraci%C3%B3n%20gratuita%20en%20FisioZentrum" target="_blank" class="btn-primary">Valoración gratuita →</a>
+      <a href="#cuerpo" class="btn-secondary">¿Dónde te duele?</a>
+    </div>
+  </div>
+  <div class="hero__visual">
+    <div class="hero__stat-card reveal d1">
+      <div class="hero__stat-num">3.200+</div>
+      <div class="hero__stat-label">Pacientes recuperados</div>
+      <div class="hero__rating">
+        <span class="hero__rating-stars">★★★★★</span>
+        <span class="hero__rating-text">4.9 Google Reviews</span>
+      </div>
+    </div>
+    <div class="hero__stat-card reveal d2">
+      <div class="hero__stat-num">14 años</div>
+      <div class="hero__stat-label">De experiencia clínica</div>
+    </div>
+    <div class="hero__stat-card reveal d3">
+      <div class="hero__stat-num">98%</div>
+      <div class="hero__stat-label">Satisfacción del paciente</div>
+    </div>
+  </div>
+</section>
+
+<!-- TAREA 7 — TICKER DISPONIBILIDAD -->
+<div class="ticker" id="availTicker">
+  <div class="ticker__track" id="tickerTrack">
+    <span class="ticker__item"><span class="ticker__dot"></span>Miguel Sanz · Mar 10:00 disponible</span>
+    <span class="ticker__item"><span class="ticker__dot"></span>Laura Mínguez · Mié 16:30 disponible</span>
+    <span class="ticker__item"><span class="ticker__dot"></span>Valoración gratuita · Esta semana</span>
+    <span class="ticker__item"><span class="ticker__dot"></span>Álvaro Cistué · Jue 11:00 disponible</span>
+    <span class="ticker__item"><span class="ticker__dot"></span>Miguel Sanz · Vie 09:00 disponible</span>
+    <span class="ticker__item"><span class="ticker__dot"></span>Laura Mínguez · Lun 17:00 disponible</span>
+    <span class="ticker__item"><span class="ticker__dot"></span>Bono 10 sesiones · Precio especial</span>
+    <span class="ticker__item"><span class="ticker__dot"></span>Álvaro Cistué · Mar 15:30 disponible</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="statsbar">
+  <div class="statsbar__grid">
+    <div class="statsbar__item reveal"><div class="statsbar__num" data-count="3200" data-suffix="+">0</div><div class="statsbar__label">Pacientes recuperados</div></div>
+    <div class="statsbar__item reveal d1"><div class="statsbar__num" data-count="14">0</div><div class="statsbar__label">Años de experiencia</div></div>
+    <div class="statsbar__item reveal d2"><div class="statsbar__num" data-count="98" data-suffix="%">0</div><div class="statsbar__label">Satisfacción</div></div>
+    <div class="statsbar__item reveal d3"><div class="statsbar__num" data-count="12">0</div><div class="statsbar__label">Especialidades</div></div>
+  </div>
+</div>
+
+<!-- BODY MAP -->
+<section class="section section--dark" id="cuerpo">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Diagnóstico interactivo</div>
+    <h2 class="section__title reveal d1" style="text-align:center">¿Dónde te duele?</h2>
+    <p class="section__desc reveal d2" style="text-align:center;margin-left:auto;margin-right:auto">Selecciona la vista y toca la zona exacta. Te mostramos al instante qué tratamos y las sesiones estimadas.</p>
+    <div class="bm-toggle reveal d2">
+      <button class="bm-toggle__btn active" id="btnFront">Vista frontal</button>
+      <button class="bm-toggle__btn" id="btnBack">Vista posterior</button>
+    </div>
+    <div class="bm-layout">
+      <div class="bm-svg-wrap reveal">
+        <svg class="bm-svg" viewBox="0 0 300 620" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- SILUETA — peso medio, proporciones 7.5 cabezas -->
+          <!-- Cabeza -->
+          <ellipse cx="150" cy="50" rx="38" ry="44" class="bm-body-outline"/>
+          <!-- Cuello -->
+          <path d="M132,92 L168,92 L171,118 L129,118 Z" class="bm-body-outline"/>
+          <!-- Torso ancho con curvas naturales (hombros, cintura, cadera) -->
+          <path d="M84,118 C66,124 56,138 54,158 L50,290 C50,308 62,316 80,318 L130,320 L170,320 L220,318 C238,316 250,308 250,290 L246,158 C244,138 234,124 216,118 Z" class="bm-body-outline"/>
+          <!-- Brazo izquierdo (con volumen — upper arm) -->
+          <path d="M56,160 C40,168 30,186 26,210 L22,268 C20,282 26,292 38,294 L54,292 L58,252 L62,198 L72,140" class="bm-body-outline"/>
+          <!-- Antebrazo y mano izquierda -->
+          <path d="M36,294 L34,344 C34,352 40,358 48,358 L56,358 C64,358 70,352 70,344 L70,294" class="bm-body-outline"/>
+          <!-- Brazo derecho -->
+          <path d="M244,160 C260,168 270,186 274,210 L278,268 C280,282 274,292 262,294 L246,292 L242,252 L238,198 L228,140" class="bm-body-outline"/>
+          <!-- Antebrazo y mano derecha -->
+          <path d="M264,294 L266,344 C266,352 260,358 252,358 L244,358 C236,358 230,352 230,344 L230,294" class="bm-body-outline"/>
+          <!-- Pierna izquierda -->
+          <path d="M100,320 L94,448 L90,560 C90,568 96,572 104,572 L116,572 C124,572 128,568 128,560 L126,448 L122,320" class="bm-body-outline"/>
+          <!-- Pierna derecha -->
+          <path d="M200,320 L206,448 L210,560 C210,568 204,572 196,572 L184,572 C176,572 172,568 172,560 L174,448 L178,320" class="bm-body-outline"/>
+          <!-- Pie izquierdo -->
+          <path d="M90,568 C86,568 82,572 84,578 L130,578 C134,578 134,573 130,570 L116,570" class="bm-body-outline"/>
+          <!-- Pie derecho -->
+          <path d="M210,568 C214,568 218,572 216,578 L170,578 C166,578 166,573 170,570 L184,570" class="bm-body-outline"/>
+          <!-- FRONTAL — hotspots alineados al nuevo cuerpo ancho -->
+          <g id="groupFront">
+            <g class="bm-hotspot" data-title="Cabeza y ATM" data-sub="Zona craneal" data-conds="Cefalea tensional,Migraña,Vértigo postural,ATM / mandíbula,Neuralgia occipital" data-sessions="6–10" data-spec="🧠 Laura Mínguez — Neurológica">
+              <circle class="bm-ping" cx="150" cy="28" r="13"/><circle class="bm-dot" cx="150" cy="28" r="5.5"/>
+              <line x1="163" y1="28" x2="208" y2="28" class="bm-line"/><text x="211" y="32" class="bm-label">Cabeza / ATM</text>
+            </g>
+            <g class="bm-hotspot" data-title="Cervicales y cuello" data-sub="Columna cervical C1–C7" data-conds="Cervicalgia,Tortícolis,Hernia cervical,Cefalea tensional,Latigazo cervical" data-sessions="8–14" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="150" cy="106" r="13"/><circle class="bm-dot" cx="150" cy="106" r="5.5"/>
+              <line x1="137" y1="106" x2="88" y2="106" class="bm-line"/><text x="85" y="110" class="bm-label" text-anchor="end">Cervicales</text>
+            </g>
+            <g class="bm-hotspot" data-title="Hombro izquierdo" data-sub="Articulación glenohumeral" data-conds="Tendinitis manguito rotador,Bursitis,Frozen shoulder,Luxación,Rotura parcial" data-sessions="10–18" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="68" cy="138" r="13"/><circle class="bm-dot" cx="68" cy="138" r="5.5"/>
+              <line x1="55" y1="138" x2="10" y2="138" class="bm-line"/><text x="7" y="142" class="bm-label" text-anchor="end">Hombro</text>
+            </g>
+            <g class="bm-hotspot" data-title="Hombro derecho" data-sub="Articulación glenohumeral" data-conds="Tendinitis manguito rotador,Bursitis,Frozen shoulder,Luxación,Rotura parcial" data-sessions="10–18" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="232" cy="138" r="13"/><circle class="bm-dot" cx="232" cy="138" r="5.5"/>
+              <line x1="245" y1="138" x2="288" y2="138" class="bm-line"/><text x="291" y="142" class="bm-label">Hombro</text>
+            </g>
+            <g class="bm-hotspot" data-title="Codo y antebrazo" data-sub="Articulación del codo" data-conds="Epicondilitis (codo tenista),Epitrocleítis,Bursitis olécranon,Túnel cubital,Tendinitis distal bíceps" data-sessions="8–14" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="30" cy="244" r="12"/><circle class="bm-dot" cx="30" cy="244" r="5"/>
+              <line x1="18" y1="244" x2="0" y2="244" class="bm-line"/><text x="0" y="240" class="bm-label" text-anchor="end">Codo</text>
+            </g>
+            <g class="bm-hotspot" data-title="Muñeca y mano" data-sub="Mano, muñeca y dedos" data-conds="Túnel carpiano,Tendinitis De Quervain,Dedo en gatillo,Ganglión,Artrosis interfalángica" data-sessions="6–12" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="50" cy="330" r="12"/><circle class="bm-dot" cx="50" cy="330" r="5"/>
+              <line x1="38" y1="330" x2="8" y2="330" class="bm-line"/><text x="5" y="334" class="bm-label" text-anchor="end">Muñeca</text>
+            </g>
+            <g class="bm-hotspot" data-title="Pecho y costillas" data-sub="Zona torácica anterior" data-conds="Costocondritis,Dolor intercostal,Respiración dolorosa,Contractura pectoral,Síndrome de Tietze" data-sessions="6–10" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="150" cy="182" r="13"/><circle class="bm-dot" cx="150" cy="182" r="5.5"/>
+              <line x1="163" y1="182" x2="208" y2="182" class="bm-line"/><text x="211" y="186" class="bm-label">Pecho / costillas</text>
+            </g>
+            <g class="bm-hotspot" data-title="Zona lumbar y abdomen" data-sub="Columna lumbar L1–S1" data-conds="Lumbalgia aguda y crónica,Hernia discal lumbar,Ciática,Estenosis de canal,Espondilolistesis" data-sessions="12–20" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="150" cy="252" r="13"/><circle class="bm-dot" cx="150" cy="252" r="5.5"/>
+              <line x1="137" y1="252" x2="88" y2="252" class="bm-line"/><text x="85" y="256" class="bm-label" text-anchor="end">Lumbar</text>
+            </g>
+            <g class="bm-hotspot" data-title="Cadera y pelvis" data-sub="Articulación coxofemoral" data-conds="Coxartrosis,Bursitis trocantérea,Síndrome piriforme,Pubalgia,Suelo pélvico" data-sessions="10–18" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="90" cy="305" r="12"/><circle class="bm-dot" cx="90" cy="305" r="5"/>
+              <line x1="78" y1="305" x2="40" y2="305" class="bm-line"/><text x="37" y="309" class="bm-label" text-anchor="end">Cadera</text>
+            </g>
+            <g class="bm-hotspot" data-title="Muslo y cuádriceps" data-sub="Musculatura anterior del muslo" data-conds="Rotura de fibras,Contractura,Tendinitis cuadricipital,Banda iliotibial,Meralgia parestésica" data-sessions="6–12" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="108" cy="388" r="12"/><circle class="bm-dot" cx="108" cy="388" r="5"/>
+              <line x1="96" y1="388" x2="55" y2="388" class="bm-line"/><text x="52" y="392" class="bm-label" text-anchor="end">Muslo</text>
+            </g>
+            <g class="bm-hotspot" data-title="Rodilla" data-sub="Articulación femorotibial y rotuliana" data-conds="Condromalacia rotuliana,Meniscopatía,Ligamento cruzado anterior,Artrosis,Tendinitis rotuliana" data-sessions="12–20" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="108" cy="452" r="13"/><circle class="bm-dot" cx="108" cy="452" r="5.5"/>
+              <line x1="95" y1="452" x2="55" y2="452" class="bm-line"/><text x="52" y="456" class="bm-label" text-anchor="end">Rodilla</text>
+            </g>
+            <g class="bm-hotspot" data-title="Pantorrilla" data-sub="Musculatura de la pierna" data-conds="Contractura gemelar,Distensión sóleo,Síndrome compartimento,Calambres crónicos,Fascitis gemelar" data-sessions="5–10" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="108" cy="510" r="12"/><circle class="bm-dot" cx="108" cy="510" r="5"/>
+              <line x1="96" y1="510" x2="55" y2="510" class="bm-line"/><text x="52" y="514" class="bm-label" text-anchor="end">Pantorrilla</text>
+            </g>
+            <g class="bm-hotspot" data-title="Tobillo y pie" data-sub="Tobillo, talón y fascia plantar" data-conds="Esguince de tobillo,Fascitis plantar,Tendinitis Aquiles,Inestabilidad crónica,Espolón calcáneo" data-sessions="6–12" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="108" cy="566" r="12"/><circle class="bm-dot" cx="108" cy="566" r="5"/>
+              <line x1="96" y1="566" x2="55" y2="566" class="bm-line"/><text x="52" y="570" class="bm-label" text-anchor="end">Tobillo / pie</text>
+            </g>
+          </g>
+          <!-- POSTERIOR -->
+          <g id="groupBack" style="display:none">
+            <g class="bm-hotspot" data-title="Nuca y occipital" data-sub="Región suboccipital" data-conds="Cefalea occipital,Tensión suboccipital,Neuralgia occipital,Rigidez matutina,Contractura trapecio" data-sessions="6–10" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="150" cy="25" r="13"/><circle class="bm-dot" cx="150" cy="25" r="5.5"/>
+              <line x1="163" y1="25" x2="208" y2="25" class="bm-line"/><text x="211" y="29" class="bm-label">Nuca / occipital</text>
+            </g>
+            <g class="bm-hotspot" data-title="Cervicales posteriores" data-sub="Columna cervical dorsal" data-conds="Cervicalgia posterior,Hernia cervical,Latigazo,Tortícolis,Contractura escalenos" data-sessions="8–14" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="150" cy="108" r="13"/><circle class="bm-dot" cx="150" cy="108" r="5.5"/>
+              <line x1="137" y1="108" x2="92" y2="108" class="bm-line"/><text x="89" y="112" class="bm-label" text-anchor="end">Cervicales</text>
+            </g>
+            <g class="bm-hotspot" data-title="Espalda dorsal" data-sub="Columna torácica T1–T12" data-conds="Dorsalgia,Cifosis postural,Escoliosis,Contractura dorsal profunda,Costocondritis posterior" data-sessions="8–14" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="150" cy="182" r="13"/><circle class="bm-dot" cx="150" cy="182" r="5.5"/>
+              <line x1="163" y1="182" x2="208" y2="182" class="bm-line"/><text x="211" y="186" class="bm-label">Dorsal</text>
+            </g>
+            <g class="bm-hotspot" data-title="Lumbar y sacro" data-sub="Columna lumbar posterior" data-conds="Lumbalgia aguda,Hernia discal L4-L5,Ciatalgia,Síndrome facetario,Contractura lumbar bilateral" data-sessions="12–20" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="150" cy="248" r="13"/><circle class="bm-dot" cx="150" cy="248" r="5.5"/>
+              <line x1="137" y1="248" x2="92" y2="248" class="bm-line"/><text x="89" y="252" class="bm-label" text-anchor="end">Lumbar</text>
+            </g>
+            <g class="bm-hotspot" data-title="Glúteo y articulación sacroilíaca" data-sub="Región glútea y sacroilíaca" data-conds="Síndrome piriforme,Disfunción sacroilíaca,Bursitis trocantérea,Coxalgia,Ciatalgia glútea" data-sessions="10–16" data-spec="🦴 Laura Mínguez — Columna">
+              <circle class="bm-ping" cx="116" cy="295" r="12"/><circle class="bm-dot" cx="116" cy="295" r="5"/>
+              <line x1="104" y1="295" x2="62" y2="295" class="bm-line"/><text x="59" y="299" class="bm-label" text-anchor="end">Glúteo / sacro</text>
+            </g>
+            <g class="bm-hotspot" data-title="Isquiotibiales" data-sub="Musculatura posterior del muslo" data-conds="Rotura de fibras isquiotibiales,Contractura crónica,Tendinitis proximal,Síndrome del corredor,Distensión" data-sessions="6–12" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="110" cy="378" r="12"/><circle class="bm-dot" cx="110" cy="378" r="5"/>
+              <line x1="98" y1="378" x2="62" y2="378" class="bm-line"/><text x="59" y="382" class="bm-label" text-anchor="end">Isquiotibiales</text>
+            </g>
+            <g class="bm-hotspot" data-title="Rodilla posterior" data-sub="Hueco poplíteo y tendones" data-conds="Quiste de Baker,Tendinitis semimembranoso,Dolor poplíteo,LCA / LCP,Lesión meniscal posterior" data-sessions="10–18" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="110" cy="446" r="13"/><circle class="bm-dot" cx="110" cy="446" r="5.5"/>
+              <line x1="98" y1="446" x2="62" y2="446" class="bm-line"/><text x="59" y="450" class="bm-label" text-anchor="end">Rodilla</text>
+            </g>
+            <g class="bm-hotspot" data-title="Pantorrilla y gemelo" data-sub="Complejo gemelar-sóleo" data-conds="Rotura gemelar,Distensión sóleo,Síndrome compartimento posterior,Calambres crónicos,Tendinitis plantar" data-sessions="5–10" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="108" cy="500" r="12"/><circle class="bm-dot" cx="108" cy="500" r="5"/>
+              <line x1="96" y1="500" x2="62" y2="500" class="bm-line"/><text x="59" y="504" class="bm-label" text-anchor="end">Pantorrilla</text>
+            </g>
+            <g class="bm-hotspot" data-title="Talón y tendón de Aquiles" data-sub="Tendón Aquiles y calcáneo" data-conds="Tendinitis Aquiles,Rotura parcial Aquiles,Bursitis retrocalcánea,Espolón calcáneo,Periostitis tibial" data-sessions="8–14" data-spec="🏃 Miguel Sanz — Deportiva">
+              <circle class="bm-ping" cx="105" cy="558" r="12"/><circle class="bm-dot" cx="105" cy="558" r="5"/>
+              <line x1="93" y1="558" x2="62" y2="558" class="bm-line"/><text x="59" y="562" class="bm-label" text-anchor="end">Talón / Aquiles</text>
+            </g>
+          </g>
+        </svg>
+        <p class="bm-hint">Toca cualquier punto para ver el diagnóstico</p>
+      </div>
+      <div class="bm-panel reveal d1" id="bpanel">
+        <div class="bpanel-default" id="bpanel-default">
+          <span class="bpanel-default-icon">👆</span>
+          <p>Selecciona una zona del cuerpo<br>para ver las lesiones que tratamos<br>y las sesiones estimadas.</p>
+        </div>
+        <div id="bpanel-content" style="display:none">
+          <div class="bpanel__zone" id="bpanel-sub"></div>
+          <div class="bpanel__title" id="bpanel-title"></div>
+          <div class="bpanel__tags" id="bpanel-tags"></div>
+          <div class="bpanel__sessions">
+            <div class="bpanel__sessions-num" id="bpanel-sessions"></div>
+            <div class="bpanel__sessions-text">sesiones estimadas<br>según gravedad</div>
+          </div>
+          <div class="bpanel__specialist" id="bpanel-spec"></div>
+          <a href="https://wa.me/34612345678?text=Hola%2C%20tengo%20un%20problema%20en%20" target="_blank" class="btn-primary" id="bpanel-cta" style="font-size:.84rem;padding:12px 20px">Consultar por WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAREA 6 — QUIZ AUTOEVALUACIÓN -->
+<section class="section" id="quiz">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Autoevaluación gratuita</div>
+    <h2 class="section__title reveal d1" style="text-align:center;max-width:580px;margin:0 auto 14px">¿Qué especialista necesito?</h2>
+    <p class="reveal d2" style="text-align:center;color:var(--text-light);font-size:.95rem;margin-bottom:48px;max-width:460px;margin-left:auto;margin-right:auto">5 preguntas. Sin registro. Te decimos exactamente a quién debes ver y qué esperar.</p>
+    <div class="quiz__wrap reveal d2">
+      <div class="quiz__progress-bar"><div class="quiz__progress-fill" id="quizFill"></div></div>
+      <div class="quiz__step-label"><span id="quizStepNum">1</span> de 5</div>
+      <div class="quiz__steps">
+
+        <!-- Paso 1 -->
+        <div class="quiz__step active" data-step="1">
+          <div class="quiz__q">¿Dónde sientes el dolor o molestia?</div>
+          <div class="quiz__opts">
+            <button class="quiz__opt" data-key="zona" data-val="cervical">Cuello / cervicales</button>
+            <button class="quiz__opt" data-key="zona" data-val="hombro">Hombro / brazo</button>
+            <button class="quiz__opt" data-key="zona" data-val="espalda">Espalda o columna</button>
+            <button class="quiz__opt" data-key="zona" data-val="rodilla">Rodilla / cadera</button>
+            <button class="quiz__opt" data-key="zona" data-val="tobillo">Tobillo / pie</button>
+            <button class="quiz__opt" data-key="zona" data-val="general">Varias zonas / no sé</button>
+          </div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="quiz__step" data-step="2">
+          <div class="quiz__q">¿Cuándo aparece el dolor?</div>
+          <div class="quiz__opts">
+            <button class="quiz__opt" data-key="cuando" data-val="movimiento">Al moverme o hacer esfuerzo</button>
+            <button class="quiz__opt" data-key="cuando" data-val="reposo">En reposo o al dormir</button>
+            <button class="quiz__opt" data-key="cuando" data-val="siempre">Casi siempre, sin razón clara</button>
+            <button class="quiz__opt" data-key="cuando" data-val="deporte">Solo cuando hago deporte</button>
+          </div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="quiz__step" data-step="3">
+          <div class="quiz__q">¿Tienes hormigueos, entumecimiento o sensación de corriente?</div>
+          <div class="quiz__opts">
+            <button class="quiz__opt" data-key="hormigueo" data-val="si">Sí, con frecuencia</button>
+            <button class="quiz__opt" data-key="hormigueo" data-val="aveces">A veces</button>
+            <button class="quiz__opt" data-key="hormigueo" data-val="no">No, solo dolor o tensión</button>
+          </div>
+        </div>
+
+        <!-- Paso 4 -->
+        <div class="quiz__step" data-step="4">
+          <div class="quiz__q">¿Cuánto tiempo llevas con esta molestia?</div>
+          <div class="quiz__opts">
+            <button class="quiz__opt" data-key="tiempo" data-val="dias">Menos de 2 semanas</button>
+            <button class="quiz__opt" data-key="tiempo" data-val="semanas">2 semanas – 2 meses</button>
+            <button class="quiz__opt" data-key="tiempo" data-val="meses">Más de 2 meses</button>
+            <button class="quiz__opt" data-key="tiempo" data-val="años">Años, es algo crónico</button>
+          </div>
+        </div>
+
+        <!-- Paso 5 -->
+        <div class="quiz__step" data-step="5">
+          <div class="quiz__q">¿Hubo un accidente, caída o esfuerzo puntual que lo provocó?</div>
+          <div class="quiz__opts">
+            <button class="quiz__opt" data-key="accidente" data-val="si">Sí, hubo un momento concreto</button>
+            <button class="quiz__opt" data-key="accidente" data-val="deporte">Fue durante el deporte</button>
+            <button class="quiz__opt" data-key="accidente" data-val="no">No, apareció poco a poco</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Resultado -->
+      <div class="quiz__result" id="quizResult">
+        <div class="quiz__result-icon" id="quizResIcon">🧑‍⚕️</div>
+        <div class="quiz__result-title" id="quizResTitle">Tu especialista recomendado</div>
+        <div class="quiz__result-specialist" id="quizResSpec"></div>
+        <div class="quiz__result-desc" id="quizResDesc"></div>
+        <div class="quiz__result-sessions" id="quizResSes"></div>
+        <a class="btn-primary" id="quizResCta" href="#" target="_blank">Pedir cita con este especialista →</a>
+        <button class="quiz__restart" id="quizRestart">Repetir test</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRATAMIENTOS -->
+<section class="section" id="tratamientos">
+  <div class="container">
+    <div class="section__eyebrow reveal">Especialidades</div>
+    <h2 class="section__title reveal d1">Nuestros tratamientos</h2>
+    <p class="section__desc reveal d2">Fisioterapia especializada con técnicas de última generación, adaptadas a cada tipo de lesión y estilo de vida.</p>
+    <div class="treatments__grid">
+      <div class="tcard reveal">
+        <div class="tcard__icon">🏃</div>
+        <div class="tcard__name">Fisioterapia deportiva</div>
+        <div class="tcard__desc">Tratamiento y prevención de lesiones en deportistas. Desde esguinces y rotura de fibras hasta vuelta al deporte de alto rendimiento.</div>
+        <div class="tcard__badge">↗ El más solicitado</div>
+      </div>
+      <div class="tcard reveal d1">
+        <div class="tcard__icon">🦴</div>
+        <div class="tcard__name">Rehabilitación de columna</div>
+        <div class="tcard__desc">Hernias discales, ciática, lumbalgia crónica y cervicalgia. Terapia manual avanzada combinada con ejercicio terapéutico.</div>
+        <div class="tcard__badge">↗ Alta efectividad</div>
+      </div>
+      <div class="tcard reveal d2">
+        <div class="tcard__icon">🧠</div>
+        <div class="tcard__name">Fisioterapia neurológica</div>
+        <div class="tcard__desc">Rehabilitación tras ictus, esclerosis múltiple, Parkinson y lesiones medulares. Especialistas certificados en neurorehabilitación.</div>
+        <div class="tcard__badge">↗ Especialistas certificados</div>
+      </div>
+      <div class="tcard reveal d3">
+        <div class="tcard__icon">✨</div>
+        <div class="tcard__name">Fisioterapia estética</div>
+        <div class="tcard__desc">Drenaje linfático manual, tratamiento de cicatrices, radiofrecuencia corporal y fisioterapia del suelo pélvico.</div>
+        <div class="tcard__badge">↗ Resultados visibles</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- D — EJERCICIOS GRATUITOS -->
+<section class="section" id="ejercicios">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Recursos gratuitos</div>
+    <h2 class="section__title reveal d1" style="text-align:center">Ejercicios que puedes hacer hoy</h2>
+    <p class="reveal d2" style="text-align:center;color:var(--text-light);font-size:.95rem;margin-bottom:52px;max-width:500px;margin-left:auto;margin-right:auto">Selecciona tu zona y accede a ejercicios guiados por nuestros fisioterapeutas. Gratis, sin registro.</p>
+    <div class="ej__filters reveal d2">
+      <button class="ej__filter active" data-cat="all">Todos</button>
+      <button class="ej__filter" data-cat="cervical">Cervicales</button>
+      <button class="ej__filter" data-cat="espalda">Espalda</button>
+      <button class="ej__filter" data-cat="rodilla">Rodilla</button>
+      <button class="ej__filter" data-cat="hombro">Hombro</button>
+      <button class="ej__filter" data-cat="tobillo">Tobillo</button>
+    </div>
+    <div class="ej__grid reveal d3" id="ejGrid">
+      <div class="ej__card" data-cat="cervical">
+        <div class="ej__visual">🔄</div>
+        <div class="ej__body">
+          <div class="ej__zone">Cervicales</div>
+          <div class="ej__name">Movilidad cervical básica</div>
+          <div class="ej__desc">Rotaciones y flexiones suaves para reducir la tensión del cuello. 5 minutos al día.</div>
+          <div class="ej__meta"><span>⏱ 5 min</span><span>📶 Principiante</span></div>
+          <a href="https://www.youtube.com/results?search_query=ejercicios+cervicales+fisioterapia" target="_blank" rel="noopener" class="ej__link">Ver ejercicio →</a>
+        </div>
+      </div>
+      <div class="ej__card" data-cat="espalda">
+        <div class="ej__visual">🧘</div>
+        <div class="ej__body">
+          <div class="ej__zone">Lumbar</div>
+          <div class="ej__name">Estiramiento lumbar en suelo</div>
+          <div class="ej__desc">Ejercicio de flexibilización para la zona lumbar. Ideal para el dolor matutino.</div>
+          <div class="ej__meta"><span>⏱ 8 min</span><span>📶 Principiante</span></div>
+          <a href="https://www.youtube.com/results?search_query=estiramiento+lumbar+fisioterapia" target="_blank" rel="noopener" class="ej__link">Ver ejercicio →</a>
+        </div>
+      </div>
+      <div class="ej__card" data-cat="hombro">
+        <div class="ej__visual">💪</div>
+        <div class="ej__body">
+          <div class="ej__zone">Hombro</div>
+          <div class="ej__name">Fortalecimiento del manguito rotador</div>
+          <div class="ej__desc">Ejercicios con goma elástica para estabilizar el hombro y prevenir lesiones.</div>
+          <div class="ej__meta"><span>⏱ 10 min</span><span>📶 Intermedio</span></div>
+          <a href="https://www.youtube.com/results?search_query=ejercicios+manguito+rotador+fisioterapia" target="_blank" rel="noopener" class="ej__link">Ver ejercicio →</a>
+        </div>
+      </div>
+      <div class="ej__card" data-cat="rodilla">
+        <div class="ej__visual">🦵</div>
+        <div class="ej__body">
+          <div class="ej__zone">Rodilla</div>
+          <div class="ej__name">Fortalecimiento de cuádriceps sin impacto</div>
+          <div class="ej__desc">Sentadilla isométrica y extensión de rodilla. Protege el cartílago y mejora la estabilidad.</div>
+          <div class="ej__meta"><span>⏱ 12 min</span><span>📶 Intermedio</span></div>
+          <a href="https://www.youtube.com/results?search_query=ejercicios+rodilla+cuadriceps+fisioterapia" target="_blank" rel="noopener" class="ej__link">Ver ejercicio →</a>
+        </div>
+      </div>
+      <div class="ej__card" data-cat="espalda">
+        <div class="ej__visual">⬆️</div>
+        <div class="ej__body">
+          <div class="ej__zone">Dorsal</div>
+          <div class="ej__name">Corrección postural para espalda alta</div>
+          <div class="ej__desc">Ejercicios de retracción escapular para combatir la cifosis postural de pantalla.</div>
+          <div class="ej__meta"><span>⏱ 7 min</span><span>📶 Principiante</span></div>
+          <a href="https://www.youtube.com/results?search_query=ejercicios+postura+espalda+cifosis+fisioterapia" target="_blank" rel="noopener" class="ej__link">Ver ejercicio →</a>
+        </div>
+      </div>
+      <div class="ej__card" data-cat="tobillo">
+        <div class="ej__visual">🦶</div>
+        <div class="ej__body">
+          <div class="ej__zone">Tobillo</div>
+          <div class="ej__name">Propiocepción y equilibrio de tobillo</div>
+          <div class="ej__desc">Ejercicios de equilibrio unipodal para recuperar la estabilidad tras esguince.</div>
+          <div class="ej__meta"><span>⏱ 8 min</span><span>📶 Intermedio</span></div>
+          <a href="https://www.youtube.com/results?search_query=ejercicios+propiocepcion+tobillo+fisioterapia" target="_blank" rel="noopener" class="ej__link">Ver ejercicio →</a>
+        </div>
+      </div>
+    </div>
+    <div class="reveal d3" style="text-align:center;margin-top:40px">
+      <p style="font-size:.88rem;color:var(--text-light);margin-bottom:16px">¿Necesitas un plan de ejercicios personalizado para tu lesión?</p>
+      <a href="https://wa.me/34612345678?text=Hola%2C%20quiero%20un%20plan%20de%20ejercicios%20personalizado" target="_blank" class="btn-primary" style="display:inline-flex">Pedir plan personalizado →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TAREA 2 — COMPARADOR -->
+<section class="section section--gray" id="comparador">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">La diferencia es clara</div>
+    <h2 class="section__title reveal d1" style="text-align:center;max-width:600px;margin:0 auto 14px">FisioZentrum vs clínica tradicional</h2>
+    <p class="reveal d2" style="text-align:center;color:var(--text-light);font-size:.95rem;margin-bottom:52px;max-width:480px;margin-left:auto;margin-right:auto">No todas las clínicas de fisioterapia son iguales. Esta es la diferencia entre recuperarte de verdad y solo aguantar el dolor.</p>
+    <div class="cmp__grid">
+      <div class="cmp__col cmp__col--bad reveal">
+        <div class="cmp__col-header">
+          <span class="cmp__col-icon">❌</span>
+          <span class="cmp__col-title">Clínica tradicional</span>
+        </div>
+        <div class="cmp__row">Sin diagnóstico inicial — empiezan directo</div>
+        <div class="cmp__row">Sesiones de 15–20 minutos</div>
+        <div class="cmp__row">Sin plan de tratamiento escrito</div>
+        <div class="cmp__row">Sin seguimiento entre sesiones</div>
+        <div class="cmp__row">No explican qué lesión tienes ni por qué</div>
+        <div class="cmp__row">Sin informe de alta ni plan de prevención</div>
+        <div class="cmp__row">Mismas técnicas para todos los pacientes</div>
+      </div>
+      <div class="cmp__divider reveal d1"><span class="cmp__vs">VS</span></div>
+      <div class="cmp__col cmp__col--good reveal d2">
+        <div class="cmp__col-header">
+          <span class="cmp__col-icon">✅</span>
+          <span class="cmp__col-title">FisioZentrum</span>
+        </div>
+        <div class="cmp__row">Diagnóstico completo de 50 minutos</div>
+        <div class="cmp__row">Sesiones de 45 minutos sin interrupciones</div>
+        <div class="cmp__row">Plan personalizado desde el primer día</div>
+        <div class="cmp__row">Seguimiento por WhatsApp entre sesiones</div>
+        <div class="cmp__row">Te explicamos exactamente qué tienes y por qué</div>
+        <div class="cmp__row">Informe de alta + plan de prevención de recaídas</div>
+        <div class="cmp__row">Protocolo adaptado a tu lesión y estilo de vida</div>
+      </div>
+    </div>
+    <div class="reveal d3" style="text-align:center;margin-top:48px">
+      <a href="https://wa.me/34612345678?text=Hola%2C%20quiero%20la%20valoraci%C3%B3n%20gratuita%20en%20FisioZentrum" target="_blank" class="btn-primary" style="display:inline-flex">Empieza con la valoración gratuita →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section class="section section--dark" id="metodo">
+  <div class="container">
+    <div class="section__eyebrow reveal">Nuestro método</div>
+    <h2 class="section__title reveal d1">Tu camino hacia la recuperación</h2>
+    <p class="section__desc reveal d2">Un proceso claro y medible. Sabemos exactamente en qué punto estás en cada momento y cuándo vas a estar bien.</p>
+    <div class="timeline">
+      <div class="tstep reveal">
+        <div class="tstep__num">1</div>
+        <div class="tstep__week">Día 1</div>
+        <div class="tstep__title">Diagnóstico preciso</div>
+        <div class="tstep__desc">Valoración de 50 min. Identificamos el origen real del dolor, no solo los síntomas superficiales.</div>
+      </div>
+      <div class="tstep reveal d1">
+        <div class="tstep__num">2</div>
+        <div class="tstep__week">Semana 1–2</div>
+        <div class="tstep__title">Plan personalizado</div>
+        <div class="tstep__desc">Diseñamos un protocolo específico para tu lesión, tu cuerpo y tu ritmo de vida diario.</div>
+      </div>
+      <div class="tstep reveal d2">
+        <div class="tstep__num">3</div>
+        <div class="tstep__week">Semana 3–8</div>
+        <div class="tstep__title">Tratamiento activo</div>
+        <div class="tstep__desc">Sesiones de fisioterapia + ejercicios en casa. Seguimiento semanal del progreso con métricas reales.</div>
+      </div>
+      <div class="tstep reveal d3">
+        <div class="tstep__num">4</div>
+        <div class="tstep__week">Alta</div>
+        <div class="tstep__title">Alta y prevención</div>
+        <div class="tstep__desc">Plan de mantenimiento para que la lesión no regrese. Sin recaídas, sin sorpresas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULADORA -->
+<section class="section section--gray" id="calculadora">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Herramienta exclusiva</div>
+    <h2 class="section__title reveal d1" style="text-align:center;max-width:560px;margin:0 auto 14px">¿Cuántas sesiones necesito?</h2>
+    <p class="reveal d2" style="text-align:center;color:var(--text-light);font-size:.95rem;margin-bottom:48px;max-width:460px;margin-left:auto;margin-right:auto">Responde 3 preguntas y te damos una estimación orientativa completamente gratis.</p>
+    <div class="calc reveal d2">
+      <div class="calc__title">Calculadora de recuperación</div>
+      <div class="calc__sub">Estimación basada en datos clínicos reales · Solo orientativa</div>
+      <div class="calc__step">
+        <div class="calc__label">1. ¿Zona de la lesión?</div>
+        <div class="calc__options" id="calcZone">
+          <button class="calc__opt" data-v="tobillo">Tobillo / pie</button>
+          <button class="calc__opt" data-v="rodilla">Rodilla</button>
+          <button class="calc__opt" data-v="cadera">Cadera</button>
+          <button class="calc__opt" data-v="lumbar">Lumbar</button>
+          <button class="calc__opt" data-v="espalda">Espalda dorsal</button>
+          <button class="calc__opt" data-v="cervical">Cervicales</button>
+          <button class="calc__opt" data-v="hombro">Hombro</button>
+          <button class="calc__opt" data-v="codo">Codo / muñeca</button>
+        </div>
+      </div>
+      <div class="calc__step">
+        <div class="calc__label">2. ¿Cuánto tiempo llevas con el dolor? — <span id="calcDurTxt" style="color:var(--teal);font-weight:800">1 semana</span></div>
+        <input type="range" class="calc__slider" id="calcDur" min="1" max="8" value="1">
+        <div class="calc__slider-labels"><span>1 semana</span><span>1 mes</span><span>3 meses</span><span>6+ meses</span></div>
+      </div>
+      <div class="calc__step">
+        <div class="calc__label">3. ¿Intensidad del dolor?</div>
+        <div class="calc__options" id="calcInt">
+          <button class="calc__opt" data-v="leve">Leve — molestia puntual</button>
+          <button class="calc__opt" data-v="moderado">Moderado — limita actividad</button>
+          <button class="calc__opt" data-v="severo">Severo — incapacitante</button>
+        </div>
+      </div>
+      <div class="calc__result" id="calcResult">
+        <div class="calc__result-row">
+          <div><div class="calc__result-num" id="calcNum">—</div><div class="calc__result-label">sesiones estimadas</div></div>
+          <div><div class="calc__result-cost" id="calcCost">—</div><div style="font-size:.76rem;color:rgba(255,255,255,.38);margin-top:4px">coste estimado (€40–55/sesión)</div></div>
+        </div>
+        <div class="calc__result-note">* Estimación orientativa. El número real se determina tras la valoración inicial gratuita. Llámanos y sin compromiso.</div>
+      </div>
+      <button class="calc__btn" id="calcBtn">Calcular mis sesiones →</button>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section class="section" id="equipo">
+  <div class="container">
+    <div class="section__eyebrow reveal">El equipo</div>
+    <h2 class="section__title reveal d1">Fisioterapeutas especializados</h2>
+    <p class="section__desc reveal d2">Todos nuestros profesionales tienen formación universitaria, posgrado de especialización y formación continua certificada.</p>
+    <div class="team__grid">
+      <div class="team-card reveal">
+        <div class="team-card__img">👨‍⚕️</div>
+        <div class="team-card__body">
+          <div class="team-card__name">Dr. Miguel Sanz</div>
+          <div class="team-card__role">Director · Fisio deportivo</div>
+          <div class="team-card__desc">14 años de experiencia. Especialista en fisioterapia deportiva y readaptación funcional. Ha trabajado con equipos de fútbol y atletismo de alto rendimiento en Aragón.</div>
+          <div class="team-card__tags"><span class="team-card__tag">Fisio deportivo</span><span class="team-card__tag">Ecografía</span><span class="team-card__tag">Punción seca</span></div>
+        </div>
+      </div>
+      <div class="team-card reveal d1">
+        <div class="team-card__img">👩‍⚕️</div>
+        <div class="team-card__body">
+          <div class="team-card__name">Laura Mínguez</div>
+          <div class="team-card__role">Especialista en columna</div>
+          <div class="team-card__desc">Experta en patología vertebral y dolor crónico. Formada en McKenzie, Mulligan y osteopatía. Más de 900 pacientes tratados con hernias discales y ciática.</div>
+          <div class="team-card__tags"><span class="team-card__tag">McKenzie</span><span class="team-card__tag">Osteopatía</span><span class="team-card__tag">RPG</span></div>
+        </div>
+      </div>
+      <div class="team-card reveal d2">
+        <div class="team-card__img">🧑‍⚕️</div>
+        <div class="team-card__body">
+          <div class="team-card__name">Álvaro Cistué</div>
+          <div class="team-card__role">Fisio neurológico y pediátrico</div>
+          <div class="team-card__desc">Especialista en rehabilitación neurológica y fisioterapia pediátrica. Posgrado en neurorehabilitación. Trato cercano y metodología Bobath certificada.</div>
+          <div class="team-card__tags"><span class="team-card__tag">Neurológica</span><span class="team-card__tag">Pediatría</span><span class="team-card__tag">Bobath</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A — MURO DE CERTIFICACIONES -->
+<section class="section section--gray" id="certificaciones">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Acreditaciones y formación</div>
+    <h2 class="section__title reveal d1" style="text-align:center">Profesionales certificados</h2>
+    <p class="reveal d2" style="text-align:center;color:var(--text-light);font-size:.95rem;margin-bottom:52px;max-width:520px;margin-left:auto;margin-right:auto">Todos nuestros fisioterapeutas tienen formación universitaria, colegiación oficial y especialización de posgrado.</p>
+    <div class="cert__grid reveal d2">
+      <div class="cert__item">
+        <div class="cert__icon">🏛️</div>
+        <div class="cert__name">Colegio Oficial de Fisioterapeutas de Aragón</div>
+        <div class="cert__desc">Colegiados activos nº 2341, 2198, 2407</div>
+      </div>
+      <div class="cert__item">
+        <div class="cert__icon">🎓</div>
+        <div class="cert__name">Método McKenzie</div>
+        <div class="cert__desc">Diagnóstico y tratamiento mecánico de la columna</div>
+      </div>
+      <div class="cert__item">
+        <div class="cert__icon">🏥</div>
+        <div class="cert__name">Concepto Bobath</div>
+        <div class="cert__desc">Neurorehabilitación pediátrica y adultos</div>
+      </div>
+      <div class="cert__item">
+        <div class="cert__icon">💉</div>
+        <div class="cert__name">Punción Seca</div>
+        <div class="cert__desc">Técnica invasiva para puntos gatillo miofasciales</div>
+      </div>
+      <div class="cert__item">
+        <div class="cert__icon">🤝</div>
+        <div class="cert__name">Técnica Mulligan</div>
+        <div class="cert__desc">Movilización con movimiento articular</div>
+      </div>
+      <div class="cert__item">
+        <div class="cert__icon">♀️</div>
+        <div class="cert__name">Suelo Pélvico</div>
+        <div class="cert__desc">Fisioterapia uroginecológica y obstétrica</div>
+      </div>
+      <div class="cert__item">
+        <div class="cert__icon">🛡️</div>
+        <div class="cert__name">Adeslas · Sanitas · Asisa · Mapfre</div>
+        <div class="cert__desc">Centro concertado con principales seguros médicos</div>
+      </div>
+      <div class="cert__item">
+        <div class="cert__icon">⚡</div>
+        <div class="cert__name">Ecografía musculoesquelética</div>
+        <div class="cert__desc">Diagnóstico por imagen en cabecera de camilla</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section section--gray">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Google Reviews</div>
+    <h2 class="section__title reveal d1" style="text-align:center">Lo que dicen nuestros pacientes</h2>
+    <div class="reveal d2" style="text-align:center;font-size:1.8rem;letter-spacing:3px;margin-bottom:48px">⭐⭐⭐⭐⭐ <span style="font-size:1rem;color:var(--text-light);vertical-align:middle">4.9 · 127 reseñas</span></div>
+    <div class="reviews__grid">
+      <div class="rcard reveal">
+        <div class="rcard__stars">★★★★★</div>
+        <div class="rcard__text">"Llevaba 3 meses con lumbalgia y no podía ni sentarme. En 6 semanas con Miguel volví al trabajo sin dolor. Explican todo con detalle y se nota que les importa el paciente de verdad."</div>
+        <div class="rcard__author"><div class="rcard__avatar">CM</div><div><div class="rcard__name">Carlos M.</div><div class="rcard__date">hace 2 semanas · Google</div></div></div>
+      </div>
+      <div class="rcard reveal d1">
+        <div class="rcard__stars">★★★★★</div>
+        <div class="rcard__text">"Operada de rodilla hace 4 meses. La rehabilitación con Laura fue excepcional — no solo me recuperé antes de lo previsto, ahora corro mejor que antes de la operación."</div>
+        <div class="rcard__author"><div class="rcard__avatar">SR</div><div><div class="rcard__name">Sara R.</div><div class="rcard__date">hace 1 mes · Google</div></div></div>
+      </div>
+      <div class="rcard reveal d2">
+        <div class="rcard__stars">★★★★★</div>
+        <div class="rcard__text">"Mi hijo tiene parálisis cerebral y el trabajo de Álvaro ha sido transformador. Profesional, cercano y con un método clarísimo. La diferencia antes y después es brutal."</div>
+        <div class="rcard__author"><div class="rcard__avatar">MP</div><div><div class="rcard__name">María P.</div><div class="rcard__date">hace 3 semanas · Google</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="section" id="precios">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Tarifas</div>
+    <h2 class="section__title reveal d1" style="text-align:center">Precios claros, sin sorpresas</h2>
+    <p class="reveal d2" style="text-align:center;color:var(--text-light);margin-bottom:52px;max-width:460px;margin-left:auto;margin-right:auto">Primera valoración gratuita y sin compromiso. Sin letra pequeña.</p>
+    <div class="pricing__grid">
+      <div class="pcard reveal">
+        <div class="pcard__name">Sesión individual</div>
+        <div class="pcard__price">45<span> €/sesión</span></div>
+        <div class="pcard__desc">Para lesiones puntuales o para conocer el centro sin compromiso previo.</div>
+        <ul class="pcard__features">
+          <li>Sesión de 45 minutos</li>
+          <li>Tratamiento manual</li>
+          <li>Ejercicios personalizados</li>
+          <li>Informe de sesión</li>
+        </ul>
+        <a href="https://wa.me/34612345678" target="_blank" class="pcard__cta">Reservar sesión</a>
+      </div>
+      <div class="pcard pcard--feat reveal d1">
+        <div class="pcard__badge">Más elegido</div>
+        <div class="pcard__name">Bono 10 sesiones</div>
+        <div class="pcard__price">380<span> €</span></div>
+        <div class="pcard__desc">La opción más completa para recuperaciones y tratamientos continuados.</div>
+        <ul class="pcard__features">
+          <li>10 sesiones de 45 minutos</li>
+          <li>Valoración inicial incluida</li>
+          <li>Plan de ejercicios personalizado</li>
+          <li>Seguimiento por WhatsApp</li>
+          <li>Informe de alta incluido</li>
+        </ul>
+        <a href="https://wa.me/34612345678" target="_blank" class="pcard__cta">Reservar bono</a>
+      </div>
+      <div class="pcard reveal d2">
+        <div class="pcard__name">Primera valoración</div>
+        <div class="pcard__price">0<span> € — Gratis</span></div>
+        <div class="pcard__desc">50 minutos de valoración completa. Sin compromiso de continuar.</div>
+        <ul class="pcard__features">
+          <li>Diagnóstico completo 50 min</li>
+          <li>Plan de tratamiento</li>
+          <li>Presupuesto orientativo</li>
+          <li>Sin obligación de continuar</li>
+        </ul>
+        <a href="https://wa.me/34612345678?text=Hola%2C%20quiero%20pedir%20la%20valoraci%C3%B3n%20gratuita" target="_blank" class="pcard__cta">Pedir cita gratis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- E — GALERÍA DEL CENTRO -->
+<section class="section section--dark" id="galeria">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Nuestro centro</div>
+    <h2 class="section__title reveal d1" style="text-align:center">Conoce FisioZentrum</h2>
+    <p class="section__desc reveal d2" style="text-align:center;margin-left:auto;margin-right:auto">Instalaciones modernas en el centro de Zaragoza. Equipamiento de última generación en un ambiente cálido y profesional.</p>
+    <div class="gal__grid reveal d2">
+      <div class="gal__item gal__item--big" data-label="Sala de tratamiento principal">
+        <div class="gal__img gal__img--1"><span>🏥</span></div>
+        <div class="gal__overlay"><span>Sala de tratamiento principal</span></div>
+      </div>
+      <div class="gal__item" data-label="Zona de ejercicio terapéutico">
+        <div class="gal__img gal__img--2"><span>🏋️</span></div>
+        <div class="gal__overlay"><span>Zona de ejercicio terapéutico</span></div>
+      </div>
+      <div class="gal__item" data-label="Equipamiento de electroterapia">
+        <div class="gal__img gal__img--3"><span>⚡</span></div>
+        <div class="gal__overlay"><span>Equipamiento de electroterapia</span></div>
+      </div>
+      <div class="gal__item" data-label="Sala de neurorehabilitación">
+        <div class="gal__img gal__img--4"><span>🧠</span></div>
+        <div class="gal__overlay"><span>Sala de neurorehabilitación</span></div>
+      </div>
+      <div class="gal__item" data-label="Recepción y espera">
+        <div class="gal__img gal__img--5"><span>🛋️</span></div>
+        <div class="gal__overlay"><span>Recepción y espera</span></div>
+      </div>
+    </div>
+    <p class="reveal d3" style="text-align:center;font-size:.8rem;color:rgba(255,255,255,.3);margin-top:24px">📸 Fotografías reales del centro próximamente</p>
+  </div>
+</section>
+
+<!-- TAREA 5 — COMPROBADOR DE SEGURO -->
+<section class="section section--dark" id="seguros">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Cobertura</div>
+    <h2 class="section__title reveal d1" style="text-align:center">¿Tu seguro cubre la fisioterapia?</h2>
+    <p class="section__desc reveal d2" style="text-align:center;margin-left:auto;margin-right:auto">Selecciona tu seguro y te decimos al instante si tienes cobertura y cómo gestionarlo.</p>
+    <div class="ins__grid reveal d2">
+      <button class="ins__btn" data-seg="Adeslas" data-cubre="true" data-sesiones="15–20" data-nota="Adeslas cubre fisioterapia con derivación del médico de cabecera. Trae tu tarjeta y el volante médico.">
+        <span class="ins__name">Adeslas</span><span class="ins__check">✓</span>
+      </button>
+      <button class="ins__btn" data-seg="Sanitas" data-cubre="true" data-sesiones="12–15" data-nota="Sanitas incluye fisioterapia en la mayoría de pólizas. Solicita la autorización desde la app antes de venir.">
+        <span class="ins__name">Sanitas</span><span class="ins__check">✓</span>
+      </button>
+      <button class="ins__btn" data-seg="Asisa" data-cubre="true" data-sesiones="10–15" data-nota="Asisa cubre fisioterapia previa autorización. Llama a tu mutua con 48h de antelación para activar la cobertura.">
+        <span class="ins__name">Asisa</span><span class="ins__check">✓</span>
+      </button>
+      <button class="ins__btn" data-seg="Mapfre" data-cubre="true" data-sesiones="10–12" data-nota="Mapfre Salud cubre fisioterapia con volante médico. Te ayudamos a gestionar el trámite desde la clínica.">
+        <span class="ins__name">Mapfre</span><span class="ins__check">✓</span>
+      </button>
+      <button class="ins__btn" data-seg="AXA" data-cubre="parcial" data-sesiones="6–10" data-nota="AXA cubre parcialmente según tu póliza. Consulta con nosotros — en muchos casos podemos emitir factura para reembolso.">
+        <span class="ins__name">AXA</span><span class="ins__check">~</span>
+      </button>
+      <button class="ins__btn" data-seg="Sin seguro" data-cubre="false" data-sesiones="—" data-nota="Sin seguro tienes acceso a nuestra tarifa directa y al bono de 10 sesiones con el mejor precio. Primera valoración siempre gratuita.">
+        <span class="ins__name">Sin seguro</span><span class="ins__check">→</span>
+      </button>
+    </div>
+    <div class="ins__panel" id="insPanel">
+      <div class="ins__panel-inner">
+        <div class="ins__panel-top">
+          <div class="ins__panel-seg" id="insPanelSeg"></div>
+          <div class="ins__panel-status" id="insPanelStatus"></div>
+        </div>
+        <div class="ins__panel-sesiones" id="insPanelSes"></div>
+        <div class="ins__panel-nota" id="insPanelNota"></div>
+        <a class="btn-primary" id="insPanelCta" href="#" target="_blank" style="margin-top:20px;display:inline-flex">Pedir cita con mi seguro →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--gray">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">FAQ</div>
+    <h2 class="section__title reveal d1" style="text-align:center;margin-bottom:48px">Preguntas frecuentes</h2>
+    <div class="faq reveal d2">
+      <div class="faq-item"><button class="faq-q">¿Necesito receta médica para pedir cita?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">No. Puedes pedir cita directamente sin derivación médica. Nosotros hacemos la valoración y si detectamos que necesitas ver a otro especialista te lo comunicamos de inmediato.</div></div></div>
+      <div class="faq-item"><button class="faq-q">¿Cuánto dura cada sesión?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Las sesiones estándar son de 45 minutos. La primera valoración dura 50–60 minutos para hacer un diagnóstico completo sin prisas. Nunca acortamos las sesiones.</div></div></div>
+      <div class="faq-item"><button class="faq-q">¿Con qué frecuencia tengo que venir?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Depende de la lesión. En la fase aguda recomendamos 2–3 sesiones por semana. En mantenimiento, 1 sesión semanal. Te lo indicamos exactamente en la valoración inicial.</div></div></div>
+      <div class="faq-item"><button class="faq-q">¿Tenéis convenio con seguros médicos?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Trabajamos con Adeslas, Sanitas, Asisa y Mapfre. Consulta con tu seguro si tienes cobertura de fisioterapia. También emitimos factura para reembolso en otros seguros.</div></div></div>
+      <div class="faq-item"><button class="faq-q">¿Qué pasa si tengo que cancelar?<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Pedimos un mínimo de 24 horas de antelación para cancelar sin cargo. Si cancelas con menos tiempo o no avisas, la sesión se descuenta del bono o se cobra un 50% de la sesión individual.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- C — CHECKLIST ANTES DE VENIR -->
+<section class="section section--gray" id="antesdevenir">
+  <div class="container">
+    <div class="section__eyebrow reveal" style="text-align:center">Prepara tu visita</div>
+    <h2 class="section__title reveal d1" style="text-align:center">Antes de venir, dinos qué tienes</h2>
+    <p class="reveal d2" style="text-align:center;color:var(--text-light);font-size:.95rem;margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto">Marca lo que aplica y te decimos exactamente qué traer para aprovechar al máximo tu primera visita.</p>
+    <div class="chk__wrap reveal d2">
+      <div class="chk__grid" id="chkGrid">
+        <label class="chk__item"><input type="checkbox" class="chk__input" data-tag="informe"><span class="chk__box"></span><span class="chk__text"><strong>Informe médico</strong><span>Diagnóstico o prueba de imagen reciente</span></span></label>
+        <label class="chk__item"><input type="checkbox" class="chk__input" data-tag="radiografia"><span class="chk__box"></span><span class="chk__text"><strong>Radiografía o resonancia</strong><span>Cualquier prueba de imagen (RX, RM, TAC, eco)</span></span></label>
+        <label class="chk__item"><input type="checkbox" class="chk__input" data-tag="seguro"><span class="chk__box"></span><span class="chk__text"><strong>Tarjeta del seguro médico</strong><span>Adeslas, Sanitas, Asisa, Mapfre...</span></span></label>
+        <label class="chk__item"><input type="checkbox" class="chk__input" data-tag="medicacion"><span class="chk__box"></span><span class="chk__text"><strong>Lista de medicación actual</strong><span>Antiinflamatorios, analgésicos, relajantes</span></span></label>
+        <label class="chk__item"><input type="checkbox" class="chk__input" data-tag="operacion"><span class="chk__box"></span><span class="chk__text"><strong>Historial de operaciones</strong><span>Cirugías relacionadas con la zona afectada</span></span></label>
+        <label class="chk__item"><input type="checkbox" class="chk__input" data-tag="ropa"><span class="chk__box"></span><span class="chk__text"><strong>Ropa cómoda</strong><span>Pantalón corto o ropa deportiva para explorar</span></span></label>
+      </div>
+      <div class="chk__result" id="chkResult">
+        <div class="chk__result-title" id="chkResultTitle">Selecciona qué tienes para ver qué traer</div>
+        <ul class="chk__result-list" id="chkResultList"></ul>
+        <a class="btn-primary" id="chkCta" href="#" target="_blank" style="display:none;margin-top:16px">Pedir cita y confirmar lo que traigo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section" id="contacto">
+  <div class="container">
+    <div class="section__eyebrow reveal">Contacto</div>
+    <h2 class="section__title reveal d1">Pide tu cita hoy</h2>
+    <p class="section__desc reveal d2">Primera valoración gratuita. Te respondemos en menos de 2 horas en horario de clínica.</p>
+    <div class="contact__grid">
+      <div class="cinfo reveal">
+        <div class="cinfo__item"><div class="cinfo__icon">📍</div><div><div class="cinfo__label">Dirección</div><div class="cinfo__value">C/ Gran Vía, 45 — 50005 Zaragoza</div></div></div>
+        <div class="cinfo__item"><div class="cinfo__icon">📞</div><div><div class="cinfo__label">Teléfono</div><div class="cinfo__value">976 123 456</div></div></div>
+        <div class="cinfo__item"><div class="cinfo__icon">💬</div><div><div class="cinfo__label">WhatsApp</div><div class="cinfo__value">+34 612 345 678</div></div></div>
+        <div class="cinfo__item"><div class="cinfo__icon">🕐</div><div><div class="cinfo__label">Horario</div><div class="cinfo__value">Lun–Vie 8:00–20:00 · Sáb 9:00–14:00</div></div></div>
+        <div class="cinfo__map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11803.2!2d-0.8897!3d41.6488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914df0000!2sGran+V%C3%ADa%2C+Zaragoza!5e0!3m2!1ses!2ses!4v1" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+      <div class="cform reveal d1">
+        <div class="cform__title">Solicitar primera cita gratuita</div>
+        <div class="fg"><label class="flabel">Nombre</label><input type="text" class="finput" placeholder="Tu nombre completo"></div>
+        <div class="fg"><label class="flabel">Teléfono</label><input type="tel" class="finput" placeholder="612 345 678"></div>
+        <div class="fg"><label class="flabel">Zona de dolor</label>
+          <select class="fselect">
+            <option value="">Selecciona la zona</option>
+            <option>Cervicales / cuello</option><option>Hombro</option><option>Espalda dorsal</option>
+            <option>Lumbar / ciática</option><option>Rodilla</option><option>Tobillo / pie</option><option>Otra zona</option>
+          </select>
+        </div>
+        <div class="fg"><label class="flabel">Mensaje (opcional)</label><textarea class="ftextarea" placeholder="Cuéntanos brevemente tu caso..."></textarea></div>
+        <button class="fsubmit" onclick="alert('¡Gracias! Te contactamos en menos de 2 horas.')">Solicitar cita gratuita →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">Fisio<span>Zentrum</span></div>
+      <div class="footer__desc">Centro de fisioterapia avanzada en Zaragoza. Más de 14 años cuidando la salud de nuestros pacientes con ciencia y dedicación.</div>
+    </div>
+    <div>
+      <div class="footer__col-title">Tratamientos</div>
+      <ul class="footer__links">
+        <li><a href="#tratamientos">Fisioterapia deportiva</a></li>
+        <li><a href="#tratamientos">Rehabilitación columna</a></li>
+        <li><a href="#tratamientos">Fisioterapia neurológica</a></li>
+        <li><a href="#tratamientos">Fisioterapia estética</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Centro</div>
+      <ul class="footer__links">
+        <li><a href="#equipo">Nuestro equipo</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="#cuerpo">¿Dónde te duele?</a></li>
+        <li><a href="#calculadora">Calculadora</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-title">Legal</div>
+      <ul class="footer__links">
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Aviso legal</a></li>
+        <li><a href="#">Política de cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2025 FisioZentrum Zaragoza · C/ Gran Vía, 45 · 50005 Zaragoza</span>
+    <span>Diseño por <strong style="color:rgba(255,255,255,.45)">Diskontrol Studio</strong></span>
+  </div>
+</footer>
+
+<script>
+// LOADER
+window.addEventListener('load',function(){
+  var f=document.getElementById('loaderFill');
+  f.style.width='100%';
+  setTimeout(function(){document.getElementById('loader').classList.add('hidden')},1400);
+});
+
+// CURSOR
+var cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+document.addEventListener('mousemove',function(e){
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';
+});
+document.querySelectorAll('a,button,.calc__opt,.faq-q,.bzone').forEach(function(el){
+  el.addEventListener('mouseenter',function(){cur.style.width='18px';cur.style.height='18px';});
+  el.addEventListener('mouseleave',function(){cur.style.width='10px';cur.style.height='10px';});
+});
+
+// NAV + SUBNAV
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){
+  var y=window.scrollY;
+  nav.classList.toggle('scrolled',y>60);
+  updateProgress();
+},{passive:true});
+
+// PROGRESS
+var pFill=document.getElementById('progressFill');
+function updateProgress(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  pFill.style.height=(h>0?(window.scrollY/h*100):0)+'%';
+}
+updateProgress();
+
+// REVEAL
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// CANVAS PARTICLES
+(function(){
+  var c=document.getElementById('heroCanvas'),ctx=c.getContext('2d'),pts=[];
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight;}
+  resize();window.addEventListener('resize',resize,{passive:true});
+  for(var i=0;i<60;i++)pts.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+.5,dx:(Math.random()-.5)*.4,dy:(Math.random()-.5)*.4,o:Math.random()*.45+.08});
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(function(p){
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,168,150,'+p.o+')';ctx.fill();
+      p.x+=p.dx;p.y+=p.dy;
+      if(p.x<0||p.x>c.width)p.dx*=-1;
+      if(p.y<0||p.y>c.height)p.dy*=-1;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// COUNTERS
+(function(){
+  var done=false;
+  function run(){
+    if(done)return;
+    var bar=document.querySelector('.statsbar');
+    if(!bar||bar.getBoundingClientRect().top>window.innerHeight*.92)return;
+    done=true;
+    document.querySelectorAll('.statsbar__num[data-count]').forEach(function(el){
+      var target=parseInt(el.dataset.count),suffix=el.dataset.suffix||'',start=performance.now(),dur=1800;
+      (function tick(now){
+        var p=Math.min((now-start)/dur,1),ease=1-Math.pow(1-p,3);
+        el.textContent=Math.floor(ease*target)+(p>=1?suffix:'');
+        if(p<1)requestAnimationFrame(tick);
+      })(performance.now());
+    });
+  }
+  window.addEventListener('scroll',run,{passive:true});run();
+})();
+
+// BODY MAP REDESIGN
+(function(){
+  var def=document.getElementById('bpanel-default');
+  var cont=document.getElementById('bpanel-content');
+  var sub=document.getElementById('bpanel-sub');
+  var title=document.getElementById('bpanel-title');
+  var tags=document.getElementById('bpanel-tags');
+  var sess=document.getElementById('bpanel-sessions');
+  var spec=document.getElementById('bpanel-spec');
+  var cta=document.getElementById('bpanel-cta');
+  var btnFront=document.getElementById('btnFront');
+  var btnBack=document.getElementById('btnBack');
+  var groupFront=document.getElementById('groupFront');
+  var groupBack=document.getElementById('groupBack');
+  // Toggle vista
+  function setView(v){
+    if(v==='front'){
+      groupFront.style.display='';
+      groupBack.style.display='none';
+      btnFront.classList.add('active');
+      btnBack.classList.remove('active');
+    } else {
+      groupFront.style.display='none';
+      groupBack.style.display='';
+      btnBack.classList.add('active');
+      btnFront.classList.remove('active');
+    }
+    // Reset panel
+    document.querySelectorAll('.bm-hotspot').forEach(function(h){h.classList.remove('active');});
+    def.style.display='';cont.style.display='none';
+  }
+  if(btnFront) btnFront.addEventListener('click',function(){setView('front');});
+  if(btnBack) btnBack.addEventListener('click',function(){setView('back');});
+  // Hotspot click
+  document.querySelectorAll('.bm-hotspot').forEach(function(h){
+    h.addEventListener('click',function(){
+      document.querySelectorAll('.bm-hotspot').forEach(function(x){x.classList.remove('active');});
+      h.classList.add('active');
+      def.style.display='none'; cont.style.display='block';
+      sub.textContent=h.dataset.sub||'';
+      title.textContent=h.dataset.title||'';
+      sess.textContent=h.dataset.sessions||'';
+      if(spec) spec.textContent=h.dataset.spec||'';
+      tags.innerHTML=(h.dataset.conds||'').split(',').map(function(c){
+        return '<span class="bpanel__tag">'+c.trim()+'</span>';
+      }).join('');
+      if(cta){
+        var zone=h.dataset.title||'esa zona';
+        cta.href='https://wa.me/34612345678?text='+encodeURIComponent('Hola, tengo molestias en: '+zone+'. Me gustaría pedir una valoración gratuita.');
+      }
+    });
+  });
+})();
+
+// TILT 3D
+(function(){
+  if(window.innerWidth<=900)return;
+  document.querySelectorAll('.tcard').forEach(function(card){
+    card.addEventListener('mousemove',function(e){
+      var r=card.getBoundingClientRect();
+      var rx=((e.clientY-r.top-r.height/2)/r.height)*-8;
+      var ry=((e.clientX-r.left-r.width/2)/r.width)*8;
+      card.style.transform='translateY(-6px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    });
+    card.addEventListener('mouseleave',function(){card.style.transform='';});
+  });
+})();
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
+    if(!isOpen)item.classList.add('open');
+  });
+});
+
+// CALCULATOR
+(function(){
+  var zone=null,intensity=null;
+  var durLabels=['1 semana','2 semanas','1 mes','6 semanas','2 meses','3 meses','5 meses','6+ meses'];
+  var calcDur=document.getElementById('calcDur');
+  calcDur.addEventListener('input',function(){
+    document.getElementById('calcDurTxt').textContent=durLabels[parseInt(calcDur.value)-1];
+  });
+  document.querySelectorAll('#calcZone .calc__opt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('#calcZone .calc__opt').forEach(function(b){b.classList.remove('sel');});
+      btn.classList.add('sel');zone=btn.dataset.v;
+    });
+  });
+  document.querySelectorAll('#calcInt .calc__opt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('#calcInt .calc__opt').forEach(function(b){b.classList.remove('sel');});
+      btn.classList.add('sel');intensity=btn.dataset.v;
+    });
+  });
+  document.getElementById('calcBtn').addEventListener('click',function(){
+    if(!zone||!intensity){alert('Selecciona la zona y la intensidad del dolor.');return;}
+    var base={tobillo:8,rodilla:14,cadera:16,lumbar:16,espalda:12,cervical:10,hombro:13,codo:8};
+    var im={leve:.7,moderado:1,severo:1.5};
+    var dur=parseInt(calcDur.value);
+    var dm=dur<=2?.8:dur<=4?1:dur<=6?1.3:1.6;
+    var s=Math.round(base[zone]*im[intensity]*dm);
+    document.getElementById('calcNum').textContent=s;
+    document.getElementById('calcCost').textContent=(s*40)+'€ – '+(s*55)+'€';
+    document.getElementById('calcResult').classList.add('show');
+    document.getElementById('calcResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+})();
+
+// TAREA 6 — QUIZ AUTOEVALUACIÓN
+(function(){
+  var answers={};
+  var currentStep=1;
+  var totalSteps=5;
+  var fill=document.getElementById('quizFill');
+  var stepNum=document.getElementById('quizStepNum');
+  var result=document.getElementById('quizResult');
+  var steps=document.querySelectorAll('.quiz__step');
+  function showStep(n){
+    steps.forEach(function(s){s.classList.remove('active');});
+    var target=document.querySelector('.quiz__step[data-step="'+n+'"]');
+    if(target){target.classList.add('active');}
+    fill.style.width=((n/totalSteps)*100)+'%';
+    stepNum.textContent=n;
+  }
+  function getResult(){
+    var zona=answers.zona||'general';
+    var hormigueo=answers.hormigueo||'no';
+    var tiempo=answers.tiempo||'dias';
+    var accidente=answers.accidente||'no';
+    var cuando=answers.cuando||'movimiento';
+    var spec,desc,icon,ses,specKey;
+    if(hormigueo==='si'||(zona==='cervical'&&hormigueo!=='no')||(zona==='espalda'&&hormigueo!=='no')){
+      spec='Laura Mínguez — Columna y Neurológica';icon='🧠';
+      desc='Los hormigueos pueden indicar compromiso nervioso. Laura es especialista en patología vertebral con componente neurológico, incluyendo hernias discales y ciática.';
+      ses='12–20 sesiones estimadas';specKey='laura';
+    } else if(accidente==='deporte'||cuando==='deporte'||(zona==='rodilla'&&accidente==='si')||(zona==='tobillo'&&accidente==='si')){
+      spec='Miguel Sanz — Fisioterapia Deportiva';icon='🏃';
+      desc='Lesión de origen deportivo. Miguel es especialista en readaptación y vuelta al deporte, con protocolo específico para tu tipo de lesión.';
+      ses='8–16 sesiones estimadas';specKey='miguel';
+    } else if(tiempo==='años'||cuando==='siempre'){
+      spec='Laura Mínguez — Dolor Crónico';icon='🦴';
+      desc='El dolor crónico requiere un enfoque diferente al agudo. Laura trabaja con protocolos específicos para el dolor persistente y la sensibilización central.';
+      ses='15–25 sesiones estimadas';specKey='laura';
+    } else if(zona==='general'){
+      spec='Dr. Miguel Sanz — Valoración General';icon='🧑‍⚕️';
+      desc='Con varias zonas afectadas o sin zona concreta, la valoración inicial completa es el primer paso. Miguel realiza un diagnóstico global y te orienta al especialista correcto.';
+      ses='6–10 sesiones según diagnóstico';specKey='miguel';
+    } else {
+      spec='Miguel Sanz — Fisioterapia General';icon='💪';
+      desc='Tu caso encaja con fisioterapia musculoesquelética estándar. Miguel diseñará un plan personalizado desde el primer día para que recuperes la movilidad sin dolor.';
+      ses='8–14 sesiones estimadas';specKey='miguel';
+    }
+    document.getElementById('quizResIcon').textContent=icon;
+    document.getElementById('quizResSpec').textContent=spec;
+    document.getElementById('quizResDesc').textContent=desc;
+    document.getElementById('quizResSes').textContent='📅 '+ses;
+    var summary='Hola, acabo de hacer el test de autoevaluación en vuestra web. Zona: '+(answers.zona||'—')+', tiempo: '+(answers.tiempo||'—')+'. Me recomendáis a '+spec+'. ¿Podéis darme cita?';
+    document.getElementById('quizResCta').href='https://wa.me/34612345678?text='+encodeURIComponent(summary);
+    document.querySelector('.quiz__steps').style.display='none';
+    document.querySelector('.quiz__step-label').style.display='none';
+    fill.style.width='100%';
+    result.classList.add('show');
+  }
+  document.querySelectorAll('.quiz__opt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      answers[btn.dataset.key]=btn.dataset.val;
+      var parentStep=btn.closest('.quiz__step');
+      parentStep.querySelectorAll('.quiz__opt').forEach(function(b){b.classList.remove('sel');});
+      btn.classList.add('sel');
+      setTimeout(function(){
+        if(currentStep<totalSteps){currentStep++;showStep(currentStep);}
+        else{getResult();}
+      },320);
+    });
+  });
+  var restartBtn=document.getElementById('quizRestart');
+  if(restartBtn){
+    restartBtn.addEventListener('click',function(){
+      answers={};currentStep=1;
+      result.classList.remove('show');
+      document.querySelector('.quiz__steps').style.display='';
+      document.querySelector('.quiz__step-label').style.display='';
+      document.querySelectorAll('.quiz__opt').forEach(function(b){b.classList.remove('sel');});
+      showStep(1);
+    });
+  }
+  showStep(1);
+})();
+
+// TAREA 5 — COMPROBADOR SEGURO
+(function(){
+  var btns=document.querySelectorAll('.ins__btn');
+  var panel=document.getElementById('insPanel');
+  var panelSeg=document.getElementById('insPanelSeg');
+  var panelStatus=document.getElementById('insPanelStatus');
+  var panelSes=document.getElementById('insPanelSes');
+  var panelNota=document.getElementById('insPanelNota');
+  var panelCta=document.getElementById('insPanelCta');
+  if(!btns.length||!panel)return;
+  btns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      btns.forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var seg=btn.dataset.seg;
+      var cubre=btn.dataset.cubre;
+      var ses=btn.dataset.sesiones;
+      var nota=btn.dataset.nota;
+      panelSeg.textContent=seg;
+      panelStatus.textContent=cubre==='true'?'Cobertura confirmada':cubre==='parcial'?'Cobertura parcial':'Sin cobertura — tarifa directa';
+      panelStatus.className='ins__panel-status '+(cubre==='true'?'ok':cubre==='parcial'?'parcial':'no');
+      panelSes.textContent=ses!=='—'?'Sesiones cubiertas estimadas: '+ses:'Tarifa directa disponible desde 45€/sesión';
+      panelNota.textContent=nota;
+      var msg=encodeURIComponent('Hola, tengo seguro '+seg+' y quiero pedir una valoración gratuita en FisioZentrum.');
+      panelCta.href='https://wa.me/34612345678?text='+msg;
+      panelCta.textContent=cubre==='false'?'Ver tarifas sin seguro →':'Pedir cita con '+seg+' →';
+      panel.classList.add('show');
+    });
+  });
+})();
+
+// D — FILTRO EJERCICIOS
+(function(){
+  var filters=document.querySelectorAll('.ej__filter');
+  var cards=document.querySelectorAll('.ej__card');
+  filters.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      filters.forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var cat=btn.dataset.cat;
+      cards.forEach(function(c){
+        c.classList.toggle('hidden',cat!=='all'&&c.dataset.cat!==cat);
+      });
+    });
+  });
+})();
+
+// C — CHECKLIST ANTES DE VENIR
+(function(){
+  var advice={
+    informe:   'Trae el informe — lo leeremos antes de empezar para no perdernos ningún detalle.',
+    radiografia:'Trae la imagen en CD, papel o en tu móvil. La revisamos juntos en camilla.',
+    seguro:    'Trae tu tarjeta del seguro y el número de póliza. Nosotros hacemos la autorización.',
+    medicacion:'Anota los fármacos que tomas actualmente — algunos afectan al tratamiento.',
+    operacion: 'Trae el informe quirúrgico o el alta hospitalaria si lo conservas.',
+    ropa:      'Ven en ropa cómoda o tráela para cambiarte. Tenemos vestuarios disponibles.'
+  };
+  var always=[
+    'Llega 5 minutos antes para completar el formulario inicial.',
+    'Puedes traer una botella de agua — la sesión dura 45–50 min.',
+    'No hace falta en ayunas ni preparación especial.'
+  ];
+  var inputs=document.querySelectorAll('.chk__input');
+  var titleEl=document.getElementById('chkResultTitle');
+  var listEl=document.getElementById('chkResultList');
+  var ctaEl=document.getElementById('chkCta');
+  function update(){
+    var checked=Array.from(inputs).filter(function(i){return i.checked;});
+    if(checked.length===0){
+      titleEl.textContent='Selecciona qué tienes para ver qué traer';
+      listEl.innerHTML='';
+      if(ctaEl)ctaEl.style.display='none';
+      return;
+    }
+    titleEl.textContent='Lo que debes traer:';
+    var items=checked.map(function(i){
+      return '<li>'+advice[i.dataset.tag]+'</li>';
+    });
+    always.forEach(function(a){items.push('<li>'+a+'</li>');});
+    listEl.innerHTML=items.join('');
+    if(ctaEl){
+      ctaEl.style.display='inline-flex';
+      var tags=checked.map(function(i){return i.dataset.tag;}).join(', ');
+      ctaEl.href='https://wa.me/34612345678?text='+encodeURIComponent('Hola, quiero pedir cita. Tengo: '+tags+'. ¿Qué más necesito traer?');
+    }
+  }
+  inputs.forEach(function(i){i.addEventListener('change',update);});
+})();
+
+// B — VOLVER ARRIBA
+(function(){
+  var btn=document.getElementById('backTop');
+  if(!btn)return;
+  window.addEventListener('scroll',function(){
+    btn.classList.toggle('show',window.scrollY>500);
+  },{passive:true});
+  btn.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+
+// TAREA 4 — URGENCIA DINÁMICA
+(function(){
+  var badge=document.getElementById('urgencyBadge');
+  var bar=document.getElementById('announceBar');
+  if(!badge)return;
+  var now=new Date();
+  var day=now.getDay(); // 0=dom,1=lun...6=sab
+  var hour=now.getHours();
+  var msg,announce;
+  if(day===0){
+    msg='🟡 Agenda abierta para el lunes';
+    announce='📅 Abrimos el lunes a las 8:00 — <a href="#contacto">Reserva ya tu plaza →</a>';
+  } else if(day===6){
+    msg='🟡 Últimas plazas del sábado';
+    announce='⚡ Sábado con plazas libres — <a href="#contacto">Reserva antes de las 14:00 →</a>';
+  } else if(hour<10){
+    msg='🔴 Últimas 2 plazas esta mañana';
+    announce='⚡ Quedan solo 2 plazas esta mañana — <a href="#contacto">Reserva ahora →</a>';
+  } else if(hour<14){
+    msg='🟠 3 plazas disponibles hoy';
+    announce='🗓️ Primera valoración <strong>100% gratuita</strong> — <a href="#contacto">Reserva tu cita ahora →</a>';
+  } else if(hour<18){
+    msg='🟢 Plazas disponibles esta tarde';
+    announce='✅ Aún hay plazas esta tarde — <a href="#contacto">Pide cita en 1 minuto →</a>';
+  } else {
+    msg='🟢 Agenda abierta para mañana';
+    announce='🗓️ Primera valoración <strong>100% gratuita</strong> — <a href="#contacto">Reserva para mañana →</a>';
+  }
+  badge.textContent=msg;
+  if(bar)bar.innerHTML=announce;
+})();
+
+// TAREA 3 — CURSOR MAGNÉTICO EN CTAs
+(function(){
+  if(window.innerWidth<=900)return;
+  document.querySelectorAll('.btn-primary,.btn-secondary,.nav__cta').forEach(function(btn){
+    var rect,cx,cy,active=false;
+    btn.style.transition='transform .3s cubic-bezier(.23,1,.32,1),background .25s,box-shadow .25s,border-color .25s,color .25s';
+    btn.style.willChange='transform';
+    document.addEventListener('mousemove',function(e){
+      rect=btn.getBoundingClientRect();
+      cx=rect.left+rect.width/2;
+      cy=rect.top+rect.height/2;
+      var dx=e.clientX-cx, dy=e.clientY-cy;
+      var dist=Math.sqrt(dx*dx+dy*dy);
+      var threshold=90;
+      if(dist<threshold){
+        active=true;
+        var strength=1-(dist/threshold);
+        var mx=dx*strength*0.38;
+        var my=dy*strength*0.38;
+        btn.style.transform='translate('+mx+'px,'+my+'px)';
+      } else if(active){
+        active=false;
+        btn.style.transform='translate(0,0)';
+      }
+    },{passive:true});
+    btn.addEventListener('mouseleave',function(){
+      active=false;
+      btn.style.transform='translate(0,0)';
+    });
+  });
+})();
+
+// TAREA 7 — TICKER BUCLE INFINITO
+(function(){
+  var track=document.getElementById('tickerTrack');
+  if(!track)return;
+  track.innerHTML+=track.innerHTML;
+})();
+
+// TAREA 1 — TYPEWRITER ROTATORIO
+(function(){
+  var words=['lumbalgia','cervical','rodilla','hombro','ciática','movilidad'];
+  var el=document.getElementById('twWord');
+  var i=0;
+  function rotate(){
+    el.classList.add('out');
+    setTimeout(function(){
+      i=(i+1)%words.length;
+      el.textContent=words[i];
+      el.classList.remove('out');
+      el.classList.add('in');
+      setTimeout(function(){el.classList.remove('in');},50);
+    },350);
+  }
+  setInterval(rotate,2500);
+})();
+</script>
+</body>
+</html>
